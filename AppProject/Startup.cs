@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using AppProject.Models;
 
 namespace AppProject
 {
@@ -29,6 +31,10 @@ namespace AppProject
         {
             // Add framework services.
             services.AddMvc();
+          
+
+            services.AddDbContext<AppProjectContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("AppProjectContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,13 +53,13 @@ namespace AppProject
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles();      
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Categories}/{action=Index}/{id?}");
             });
         }
     }

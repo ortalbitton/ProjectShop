@@ -1,0 +1,42 @@
+@model AppProject.Models.ConectTable
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ConectTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color.ColorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mart.MartId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Productes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Productes.ProductId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Size.SizeId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.DetailsId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

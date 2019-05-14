@@ -1,0 +1,53 @@
+@model IEnumerable<AppProject.Models.ConectTable>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.ColorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mart.MartId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Productes.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size.SizeId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DetailsId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DetailsId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DetailsId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

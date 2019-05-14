@@ -6,16 +6,86 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190414100451_create_Categories.cs" />
+    <Compile Remove="Migrations\20190414100451_create_Categories.Designer.cs" />
+    <Compile Remove="Migrations\20190414124239_create_SubCategory.cs" />
+    <Compile Remove="Migrations\20190414124239_create_SubCategory.Designer.cs" />
+    <Compile Remove="Migrations\20190415170156_create_Productes.cs" />
+    <Compile Remove="Migrations\20190415170156_create_Productes.Designer.cs" />
+    <Compile Remove="Migrations\20190417084312_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417084312_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417090512_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417090512_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417091429_create_Customer.cs" />
+    <Compile Remove="Migrations\20190417091429_create_Customer.Designer.cs" />
+    <Compile Remove="Migrations\20190417091620_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417091620_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417091717_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417091717_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417091852_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417091852_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417093345_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417093345_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417093621_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417093621_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417094730_create_Customer.cs" />
+    <Compile Remove="Migrations\20190417094730_create_Customer.Designer.cs" />
+    <Compile Remove="Migrations\20190417094843_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417094843_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417095011_create_Mart.cs" />
+    <Compile Remove="Migrations\20190417095011_create_Mart.Designer.cs" />
+    <Compile Remove="Migrations\20190417115639_create.cs" />
+    <Compile Remove="Migrations\20190417115639_create.Designer.cs" />
+    <Compile Remove="Migrations\20190417115736_create_Customers.cs" />
+    <Compile Remove="Migrations\20190417115736_create_Customers.Designer.cs" />
+    <Compile Remove="Migrations\20190417120012_create_Marts.cs" />
+    <Compile Remove="Migrations\20190417120012_create_Marts.Designer.cs" />
+    <Compile Remove="Migrations\20190417122126_create_Customers.cs" />
+    <Compile Remove="Migrations\20190417122126_create_Customers.Designer.cs" />
+    <Compile Remove="Migrations\20190417122238_create_Customers.cs" />
+    <Compile Remove="Migrations\20190417122238_create_Customers.Designer.cs" />
+    <Compile Remove="Migrations\20190417122919_create_Customers.cs" />
+    <Compile Remove="Migrations\20190417122919_create_Customers.Designer.cs" />
+    <Compile Remove="Migrations\20190417123347_create_Marts.cs" />
+    <Compile Remove="Migrations\20190417123347_create_Marts.Designer.cs" />
+    <Compile Remove="Migrations\20190502152240_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190502152240_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190502153620_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190502153620_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190503143010_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190503143010_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190503145337_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190503145337_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190505101445_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190505101445_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190505143318_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190505143318_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190505195149_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190505195149_Create_Tables.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>

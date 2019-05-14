@@ -1,0 +1,134 @@
+@model IEnumerable<AppProject.Models.Categories>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+
+
+            $('[data-toggle="popover"]').popover({
+
+                content: SetData,
+                html: true,
+                //מיקום החלונית
+                placement: "bottom"
+
+            });
+
+            function SetData(id) {
+                var set_data = '';
+                var element = $(this);
+                var id = element.attr("id");
+                $.ajax({
+                    url: "SubCategories/Index?id" + id,
+                    method: "post",
+                    async: false,
+                    data: { id: id },
+                    success: function (data) {
+                        set_data = data;
+                    }
+                });
+                return set_data;
+            }
+
+        });
+
+        //לא למחוק
+        // סוגר לי את ה popover  
+        //כאשר אני יעשה לחיצה מחוץ ה  popover אז לא יפתח
+        $('body').click(function (e) {
+            $('[data-toggle="popover"]').each(function () {
+                if (!$(this).is(e.target) && $(this).has(e.target).length == 0 && $('.popover').has(e.target).length == 0) {
+                    $(this).popover('hide');
+                }
+            });
+        });
+
+
+
+        function ProductList() {
+            $.ajax({
+                url: "Productes/Index",
+                type: "Get",
+                dataType: "html",
+                success: function (respon) {
+                    $("#Product").html(respon)
+                }
+            });
+        }
+
+   
+
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav id="MainNavigation" class="navbar HeaderNavigation">
+            <div class="Content MainNavigation">
+                <ul class="nav PrimaryNavigation">
+                    @foreach (var item in Model)
+                    {
+                    <li class="Department MegaNavEnabled First">
+                        <a id="@item.CategoryId" class="DepartmentLink" data-trigger="click" data-toggle="popover" href="#">
+                            @item.Name
+                        </a>
+
+                       
+                    </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="navbar HeaderNavigation">
+        <div id="Product" class="Content MainNavigation">
+            @foreach (var item in Model)
+            {
+                <a class="DepartmentLink" onclick="ProductList()">@item.Name</a>
+            }
+        </div>
+    </section>
+</body>
+
+
+
+
+@*<h2>Index</h2>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                        <th style="width:40%">
+                         @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+    @Html.DisplayFor(modelItem => item.Name)
+    <a href="#" data-toggle="popover" data-trigger="click" id="@item.CategoryId">@item.Name</a>
+    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>*@
+
+

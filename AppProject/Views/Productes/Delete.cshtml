@@ -1,0 +1,65 @@
+@model AppProject.Models.Productes
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Productes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="ProductId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountInStock)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountInStock)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountOfOrders)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountOfOrders)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImgId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubCategory.SubCategoryId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>
