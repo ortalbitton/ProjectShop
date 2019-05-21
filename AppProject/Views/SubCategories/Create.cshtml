@@ -19,12 +19,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="CategoriesId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="CategoriesId" class ="form-control" asp-items="ViewBag.CategoriesId"></select>
-            </div>
-        </div>
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -33,7 +27,7 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Categories">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace AppProject.Models
 {
-    public class ConectTable
+    public class ConnectTable
     {
-        [Key]
-        public int DetailsId { get; set; }
-
-        //Foreign Key
+        //many to many
         public int ProductesId { get; set; }
         public Productes Productes { get; set; }
 
@@ -23,6 +19,5 @@ namespace AppProject.Models
 
         public int MartId { get; set; }
         public Mart Mart { get; set; }
-
     }
 }

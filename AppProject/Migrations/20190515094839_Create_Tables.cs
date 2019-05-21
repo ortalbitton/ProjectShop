@@ -13,33 +13,33 @@ namespace AppProject.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Colors",
                 columns: table => new
                 {
-                    ColorId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ColorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Colors", x => x.ColorId);
+                    table.PrimaryKey("PK_Colors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
@@ -47,64 +47,61 @@ namespace AppProject.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Mail = table.Column<string>(nullable: true),
-                    MartId = table.Column<int>(nullable: false),
                     Password = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.CustomerId);
+                    table.PrimaryKey("PK_Customer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Sizes",
                 columns: table => new
                 {
-                    SizeId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SizeName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sizes", x => x.SizeId);
+                    table.PrimaryKey("PK_Sizes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "SubCategory",
                 columns: table => new
                 {
-                    SubCategoryId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoriesId = table.Column<int>(nullable: false),
+                    CategoriesId = table.Column<int>(nullable: true),
                     SubName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubCategory", x => x.SubCategoryId);
+                    table.PrimaryKey("PK_SubCategory", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SubCategory_Categories_CategoriesId",
                         column: x => x.CategoriesId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Mart",
                 columns: table => new
                 {
-                    MartId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CustomerId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mart", x => x.MartId);
+                    table.PrimaryKey("PK_Mart", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mart_Customer_CustomerId",
-                        column: x => x.CustomerId,
+                        name: "FK_Mart_Customer_Id",
+                        column: x => x.Id,
                         principalTable: "Customer",
-                        principalColumn: "CustomerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -112,7 +109,7 @@ namespace AppProject.Migrations
                 name: "Productes",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AmountInStock = table.Column<int>(nullable: false),
                     AmountOfOrders = table.Column<int>(nullable: false),
@@ -120,83 +117,71 @@ namespace AppProject.Migrations
                     ImgId = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
-                    SubCategoryId = table.Column<int>(nullable: false)
+                    SubCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Productes", x => x.ProductId);
+                    table.PrimaryKey("PK_Productes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Productes_SubCategory_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategory",
-                        principalColumn: "SubCategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConectTable",
+                name: "ConnectTable",
                 columns: table => new
                 {
-                    DetailsId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ColorId = table.Column<int>(nullable: false),
-                    MartId = table.Column<int>(nullable: false),
                     ProductesId = table.Column<int>(nullable: false),
-                    SizeId = table.Column<int>(nullable: false)
+                    ColorId = table.Column<int>(nullable: false),
+                    SizeId = table.Column<int>(nullable: false),
+                    MartId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConectTable", x => x.DetailsId);
+                    table.PrimaryKey("PK_ConnectTable", x => new { x.ProductesId, x.ColorId, x.SizeId, x.MartId });
                     table.ForeignKey(
-                        name: "FK_ConectTable_Colors_ColorId",
+                        name: "FK_ConnectTable_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
-                        principalColumn: "ColorId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConectTable_Mart_MartId",
+                        name: "FK_ConnectTable_Mart_MartId",
                         column: x => x.MartId,
                         principalTable: "Mart",
-                        principalColumn: "MartId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConectTable_Productes_ProductesId",
+                        name: "FK_ConnectTable_Productes_ProductesId",
                         column: x => x.ProductesId,
                         principalTable: "Productes",
-                        principalColumn: "ProductId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConectTable_Sizes_SizeId",
+                        name: "FK_ConnectTable_Sizes_SizeId",
                         column: x => x.SizeId,
                         principalTable: "Sizes",
-                        principalColumn: "SizeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConectTable_ColorId",
-                table: "ConectTable",
+                name: "IX_ConnectTable_ColorId",
+                table: "ConnectTable",
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConectTable_MartId",
-                table: "ConectTable",
+                name: "IX_ConnectTable_MartId",
+                table: "ConnectTable",
                 column: "MartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConectTable_ProductesId",
-                table: "ConectTable",
-                column: "ProductesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ConectTable_SizeId",
-                table: "ConectTable",
+                name: "IX_ConnectTable_SizeId",
+                table: "ConnectTable",
                 column: "SizeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Mart_CustomerId",
-                table: "Mart",
-                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Productes_SubCategoryId",
@@ -212,7 +197,7 @@ namespace AppProject.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ConectTable");
+                name: "ConnectTable");
 
             migrationBuilder.DropTable(
                 name: "Colors");

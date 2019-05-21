@@ -11,25 +11,19 @@
     <h4>SubCategory</h4>
     <hr />
     <dl class="dl-horizontal">
-        <input type="hidden" asp-for="SubCategoryId" />
+        <input type="hidden" asp-for="Id" />
         <dt>
             @Html.DisplayNameFor(model => model.SubName)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SubName)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Categories)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Categories.CategoryId)
-        </dd>
     </dl>
     
     <form asp-action="Delete">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Delete" class="btn btn-default" asp-action="Index" asp-controller="Categories" /> |
+            <a asp-action="Index" asp-controller="Categories">Back to List</a>
         </div>
     </form>
 </div>

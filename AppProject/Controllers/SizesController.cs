@@ -33,7 +33,7 @@ namespace AppProject.Controllers
             }
 
             var sizes = await _context.Sizes
-                .SingleOrDefaultAsync(m => m.SizeId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (sizes == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SizeId,SizeName")] Sizes sizes)
+        public async Task<IActionResult> Create([Bind("Id,SizeName")] Sizes sizes)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var sizes = await _context.Sizes.SingleOrDefaultAsync(m => m.SizeId == id);
+            var sizes = await _context.Sizes.SingleOrDefaultAsync(m => m.Id == id);
             if (sizes == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SizeId,SizeName")] Sizes sizes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SizeName")] Sizes sizes)
         {
-            if (id != sizes.SizeId)
+            if (id != sizes.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SizesExists(sizes.SizeId))
+                    if (!SizesExists(sizes.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace AppProject.Controllers
             }
 
             var sizes = await _context.Sizes
-                .SingleOrDefaultAsync(m => m.SizeId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (sizes == null)
             {
                 return NotFound();
@@ -138,7 +138,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var sizes = await _context.Sizes.SingleOrDefaultAsync(m => m.SizeId == id);
+            var sizes = await _context.Sizes.SingleOrDefaultAsync(m => m.Id == id);
             _context.Sizes.Remove(sizes);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -146,7 +146,7 @@ namespace AppProject.Controllers
 
         private bool SizesExists(int id)
         {
-            return _context.Sizes.Any(e => e.SizeId == id);
+            return _context.Sizes.Any(e => e.Id == id);
         }
     }
 }

@@ -16,15 +16,9 @@
         <dd>
             @Html.DisplayFor(model => model.SubName)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Categories)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Categories.CategoryId)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.SubCategoryId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

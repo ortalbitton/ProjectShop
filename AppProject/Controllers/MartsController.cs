@@ -35,7 +35,7 @@ namespace AppProject.Controllers
 
             var mart = await _context.Mart
                 .Include(m => m.Customer)
-                .SingleOrDefaultAsync(m => m.MartId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (mart == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace AppProject.Controllers
         // GET: Marts/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId");
+            ViewData["Id"] = new SelectList(_context.Customer, "Id", "Id");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MartId,CustomerId")] Mart mart)
+        public async Task<IActionResult> Create([Bind("Id")] Mart mart)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace AppProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId", mart.CustomerId);
+            ViewData["Id"] = new SelectList(_context.Customer, "Id", "Id", mart.Id);
             return View(mart);
         }
 
@@ -76,12 +76,12 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var mart = await _context.Mart.SingleOrDefaultAsync(m => m.MartId == id);
+            var mart = await _context.Mart.SingleOrDefaultAsync(m => m.Id == id);
             if (mart == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId", mart.CustomerId);
+            ViewData["Id"] = new SelectList(_context.Customer, "Id", "Id", mart.Id);
             return View(mart);
         }
 
@@ -90,9 +90,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MartId,CustomerId")] Mart mart)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Mart mart)
         {
-            if (id != mart.MartId)
+            if (id != mart.Id)
             {
                 return NotFound();
             }
@@ -106,7 +106,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MartExists(mart.MartId))
+                    if (!MartExists(mart.Id))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace AppProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId", mart.CustomerId);
+            ViewData["Id"] = new SelectList(_context.Customer, "Id", "Id", mart.Id);
             return View(mart);
         }
 
@@ -131,7 +131,7 @@ namespace AppProject.Controllers
 
             var mart = await _context.Mart
                 .Include(m => m.Customer)
-                .SingleOrDefaultAsync(m => m.MartId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (mart == null)
             {
                 return NotFound();
@@ -145,7 +145,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mart = await _context.Mart.SingleOrDefaultAsync(m => m.MartId == id);
+            var mart = await _context.Mart.SingleOrDefaultAsync(m => m.Id == id);
             _context.Mart.Remove(mart);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -153,7 +153,7 @@ namespace AppProject.Controllers
 
         private bool MartExists(int id)
         {
-            return _context.Mart.Any(e => e.MartId == id);
+            return _context.Mart.Any(e => e.Id == id);
         }
     }
 }

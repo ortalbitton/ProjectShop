@@ -18,11 +18,10 @@ namespace AppProject.Controllers
             _context = context;    
         }
 
-
-        //GET: Categories
+        // GET: Categories
         public async Task<IActionResult> Index()
-        {       
-            return View(await _context.Categories.ToListAsync());
+        {
+            return View(await _context.Categories.Include(s=>s.SubCategories).ToListAsync());
         }
 
         // GET: Categories/Details/5
@@ -34,7 +33,7 @@ namespace AppProject.Controllers
             }
 
             var categories = await _context.Categories
-                .SingleOrDefaultAsync(m => m.CategoryId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (categories == null)
             {
                 return NotFound();
@@ -54,7 +53,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,Name")] Categories categories)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Categories categories)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +72,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var categories = await _context.Categories.SingleOrDefaultAsync(m => m.CategoryId == id);
+            var categories = await _context.Categories.SingleOrDefaultAsync(m => m.Id == id);
             if (categories == null)
             {
                 return NotFound();
@@ -86,9 +85,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name")] Categories categories)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Categories categories)
         {
-            if (id != categories.CategoryId)
+            if (id != categories.Id)
             {
                 return NotFound();
             }
@@ -102,7 +101,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriesExists(categories.CategoryId))
+                    if (!CategoriesExists(categories.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +124,7 @@ namespace AppProject.Controllers
             }
 
             var categories = await _context.Categories
-                .SingleOrDefaultAsync(m => m.CategoryId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (categories == null)
             {
                 return NotFound();
@@ -139,7 +138,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var categories = await _context.Categories.SingleOrDefaultAsync(m => m.CategoryId == id);
+            var categories = await _context.Categories.SingleOrDefaultAsync(m => m.Id == id);
             _context.Categories.Remove(categories);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -147,7 +146,7 @@ namespace AppProject.Controllers
 
         private bool CategoriesExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

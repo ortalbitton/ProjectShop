@@ -33,7 +33,7 @@ namespace AppProject.Controllers
             }
 
             var customer = await _context.Customer
-                .SingleOrDefaultAsync(m => m.CustomerId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,PhoneNumber,Address,City,CreditCard,Mail,Password,MartId")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,Address,City,CreditCard,Mail,Password")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer.SingleOrDefaultAsync(m => m.CustomerId == id);
+            var customer = await _context.Customer.SingleOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,LastName,PhoneNumber,Address,City,CreditCard,Mail,Password,MartId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PhoneNumber,Address,City,CreditCard,Mail,Password")] Customer customer)
         {
-            if (id != customer.CustomerId)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.CustomerId))
+                    if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace AppProject.Controllers
             }
 
             var customer = await _context.Customer
-                .SingleOrDefaultAsync(m => m.CustomerId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -138,7 +138,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customer.SingleOrDefaultAsync(m => m.CustomerId == id);
+            var customer = await _context.Customer.SingleOrDefaultAsync(m => m.Id == id);
             _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -146,7 +146,7 @@ namespace AppProject.Controllers
 
         private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(e => e.CustomerId == id);
+            return _context.Customer.Any(e => e.Id == id);
         }
     }
 }

@@ -15,17 +15,31 @@ namespace AppProject.Controllers
 
         public ProductesController(AppProjectContext context)
         {
-            _context = context;    
+            _context = context; 
         }
-
      
-        // GET: Productes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id, string searchString)
         {
-            var appProjectContext = _context.Productes.Include(p => p.SubCategory);
-            return View(await appProjectContext.ToListAsync());
-        }
+            if (id != null)
+                // GET: Productes/SubCategory/5
+                return View(await _context.Productes.Where(s => s.SubCategory.Id == id).ToListAsync());
 
+            // GET: All Productes
+            //return View(await _context.Productes.ToListAsync());
+
+
+
+            var productes = from m in _context.Productes
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                productes = productes.Where(s => s.ProductName.Contains(searchString) );
+
+            }
+
+            return View(await productes.ToListAsync());
+        }
 
         // GET: Productes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -36,8 +50,7 @@ namespace AppProject.Controllers
             }
 
             var productes = await _context.Productes
-                .Include(p => p.SubCategory)
-                .SingleOrDefaultAsync(m => m.ProductId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (productes == null)
             {
                 return NotFound();
@@ -49,7 +62,6 @@ namespace AppProject.Controllers
         // GET: Productes/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "SubCategoryId", "SubCategoryId");
             return View();
         }
 
@@ -58,7 +70,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategoryId")] Productes productes)
+        public async Task<IActionResult> Create([Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId")] Productes productes)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +78,6 @@ namespace AppProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "SubCategoryId", "SubCategoryId", productes.SubCategoryId);
             return View(productes);
         }
 
@@ -78,12 +89,11 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var productes = await _context.Productes.SingleOrDefaultAsync(m => m.ProductId == id);
+            var productes = await _context.Productes.SingleOrDefaultAsync(m => m.Id == id);
             if (productes == null)
             {
                 return NotFound();
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "SubCategoryId", "SubCategoryId", productes.SubCategoryId);
             return View(productes);
         }
 
@@ -92,9 +102,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategoryId")] Productes productes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId")] Productes productes)
         {
-            if (id != productes.ProductId)
+            if (id != productes.Id)
             {
                 return NotFound();
             }
@@ -108,7 +118,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductesExists(productes.ProductId))
+                    if (!ProductesExists(productes.Id))
                     {
                         return NotFound();
                     }
@@ -119,7 +129,6 @@ namespace AppProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.SubCategory, "SubCategoryId", "SubCategoryId", productes.SubCategoryId);
             return View(productes);
         }
 
@@ -132,8 +141,7 @@ namespace AppProject.Controllers
             }
 
             var productes = await _context.Productes
-                .Include(p => p.SubCategory)
-                .SingleOrDefaultAsync(m => m.ProductId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (productes == null)
             {
                 return NotFound();
@@ -147,7 +155,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var productes = await _context.Productes.SingleOrDefaultAsync(m => m.ProductId == id);
+            var productes = await _context.Productes.SingleOrDefaultAsync(m => m.Id == id);
             _context.Productes.Remove(productes);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -155,7 +163,7 @@ namespace AppProject.Controllers
 
         private bool ProductesExists(int id)
         {
-            return _context.Productes.Any(e => e.ProductId == id);
+            return _context.Productes.Any(e => e.Id == id);
         }
     }
 }

@@ -11,7 +11,7 @@
     <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
-        <input type="hidden" asp-for="CustomerId" />
+        <input type="hidden" asp-for="Id" />
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -59,12 +59,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MartId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MartId)
         </dd>
     </dl>
     

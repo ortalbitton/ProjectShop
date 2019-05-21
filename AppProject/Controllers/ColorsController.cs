@@ -33,7 +33,7 @@ namespace AppProject.Controllers
             }
 
             var colors = await _context.Colors
-                .SingleOrDefaultAsync(m => m.ColorId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (colors == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColorId,ColorName")] Colors colors)
+        public async Task<IActionResult> Create([Bind("Id,ColorName")] Colors colors)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var colors = await _context.Colors.SingleOrDefaultAsync(m => m.ColorId == id);
+            var colors = await _context.Colors.SingleOrDefaultAsync(m => m.Id == id);
             if (colors == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ColorId,ColorName")] Colors colors)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ColorName")] Colors colors)
         {
-            if (id != colors.ColorId)
+            if (id != colors.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ColorsExists(colors.ColorId))
+                    if (!ColorsExists(colors.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace AppProject.Controllers
             }
 
             var colors = await _context.Colors
-                .SingleOrDefaultAsync(m => m.ColorId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (colors == null)
             {
                 return NotFound();
@@ -138,7 +138,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var colors = await _context.Colors.SingleOrDefaultAsync(m => m.ColorId == id);
+            var colors = await _context.Colors.SingleOrDefaultAsync(m => m.Id == id);
             _context.Colors.Remove(colors);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -146,7 +146,7 @@ namespace AppProject.Controllers
 
         private bool ColorsExists(int id)
         {
-            return _context.Colors.Any(e => e.ColorId == id);
+            return _context.Colors.Any(e => e.Id == id);
         }
     }
 }

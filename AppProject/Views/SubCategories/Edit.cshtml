@@ -11,7 +11,7 @@
         <h4>SubCategory</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="SubCategoryId" />
+    <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="SubName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -20,22 +20,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="CategoriesId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="CategoriesId" class="form-control" asp-items="ViewBag.CategoriesId"></select>
-                <span asp-validation-for="CategoriesId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+                <input type="submit" value="Save" class="btn btn-default" asp- asp-action="Index" asp-controller="Categories"/>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Categories">Back to List</a>
 </div>
 
 @section Scripts {

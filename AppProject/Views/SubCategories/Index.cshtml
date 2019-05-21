@@ -4,19 +4,53 @@
     ViewData["Title"] = "Index";
 }
 
-
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            //הצגת המוצרים על פי תת קטגוריה מסוימת  בעת לחיצה
+            $(".Text").click(function () {
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: "Productes/Index?id" + id,
+                    method: "post",
+                    async: false,
+                    data: { id: id },
+                    success: function (data) {
+                        $("#Product").html(data);
+                    }
+                });
+            });
+        });
+
     </script>
 </head>
+
 
 <ul class="Component">
     @foreach (var item in Model)
     {
-        <li class="ComponentItem"><div class="Text"><a id="@item.SubCategoryId" onclick="ProductList()">@item.SubName</a></div></li>
+        <li class="ComponentItem">
+                <a class="Text" id="@item.Id">@item.SubName</a>
+
+                @*<div>
+                        <ul>
+                            <li class="link">
+                                <a asp-action="Edit" asp-route-id="@item.Id">Update</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </li>
+                        </ul>
+                    </div>*@
+
+        </li>
+
     }
+
+    @*<li><a asp-action="Create">Create New</a></li>
+    <li><a asp-action="Index">List</a></li>*@
 </ul>
+
+
 
 
 @*<h2>Index</h2>
@@ -30,9 +64,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.SubName)
                     </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Categories)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -43,12 +74,9 @@
                     @Html.DisplayFor(modelItem => item.SubName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Categories.CategoryId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.SubCategoryId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.SubCategoryId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.SubCategoryId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
     }

@@ -4,32 +4,26 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
-    @foreach (var item in Model)
-    {
 
-        <div class="col-md-3" style="margin-bottom:25px">
-            <div class="thumbnail">
-                <div class="img-thumbnail">
-                    <img class="img-responsive" src="~/imagesweb/@item.ImgId" height="300" width="300" />
-                </div>
+@foreach (var item in Model)
+{
 
+    <div class="col-md-6" style="margin-bottom:25px">
+        <div class="thumbnail">
+                <img class="img-responsive" src="~/imagesweb/@item.ImgId" height="300" width="300" />
+                <h3><a asp-action="Details" asp-route-id="@item.Id">@item.ProductName</a></h3>
+              
                 <div>
-                    <h3><a>@item.ProductName</a></h3>
-
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Update</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </div>
-
-
             </div>
-        </div>
+    
+    </div>
 
-    }
-</div>
+}
+
+
 
 
 @*<h2>Index</h2>
@@ -58,9 +52,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ImgId)
                     </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SubCategory)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -86,12 +77,9 @@
                     @Html.DisplayFor(modelItem => item.ImgId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
     }

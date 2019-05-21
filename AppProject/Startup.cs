@@ -60,6 +60,7 @@ namespace AppProject
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Categories}/{action=Index}/{id?}");
+
             });
         }
     }

@@ -62,6 +62,12 @@
     <Compile Remove="Migrations\20190505143318_Create_Tables.Designer.cs" />
     <Compile Remove="Migrations\20190505195149_Create_Tables.cs" />
     <Compile Remove="Migrations\20190505195149_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190515082440_creat.cs" />
+    <Compile Remove="Migrations\20190515082440_creat.Designer.cs" />
+    <Compile Remove="Migrations\20190515091009_creat.cs" />
+    <Compile Remove="Migrations\20190515091009_creat.Designer.cs" />
+    <Compile Remove="Migrations\20190515093000_create.cs" />
+    <Compile Remove="Migrations\20190515093000_create.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

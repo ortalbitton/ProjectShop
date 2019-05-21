@@ -18,57 +18,52 @@ namespace AppProject.Migrations
 
             modelBuilder.Entity("AppProject.Models.Categories", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("AppProject.Models.Colors", b =>
                 {
-                    b.Property<int>("ColorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ColorName");
 
-                    b.HasKey("ColorId");
+                    b.HasKey("Id");
 
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("AppProject.Models.ConectTable", b =>
+            modelBuilder.Entity("AppProject.Models.ConnectTable", b =>
                 {
-                    b.Property<int>("DetailsId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ProductesId");
 
                     b.Property<int>("ColorId");
 
-                    b.Property<int>("MartId");
-
-                    b.Property<int>("ProductesId");
-
                     b.Property<int>("SizeId");
 
-                    b.HasKey("DetailsId");
+                    b.Property<int>("MartId");
+
+                    b.HasKey("ProductesId", "ColorId", "SizeId", "MartId");
 
                     b.HasIndex("ColorId");
 
                     b.HasIndex("MartId");
 
-                    b.HasIndex("ProductesId");
-
                     b.HasIndex("SizeId");
 
-                    b.ToTable("ConectTable");
+                    b.ToTable("ConnectTable");
                 });
 
             modelBuilder.Entity("AppProject.Models.Customer", b =>
                 {
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
@@ -83,34 +78,27 @@ namespace AppProject.Migrations
 
                     b.Property<string>("Mail");
 
-                    b.Property<int>("MartId");
-
                     b.Property<string>("Password");
 
                     b.Property<int>("PhoneNumber");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("AppProject.Models.Mart", b =>
                 {
-                    b.Property<int>("MartId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
-                    b.Property<int>("CustomerId");
-
-                    b.HasKey("MartId");
-
-                    b.HasIndex("CustomerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Mart");
                 });
 
             modelBuilder.Entity("AppProject.Models.Productes", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AmountInStock");
@@ -125,9 +113,9 @@ namespace AppProject.Migrations
 
                     b.Property<string>("ProductName");
 
-                    b.Property<int>("SubCategoryId");
+                    b.Property<int?>("SubCategoryId");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("Id");
 
                     b.HasIndex("SubCategoryId");
 
@@ -136,33 +124,33 @@ namespace AppProject.Migrations
 
             modelBuilder.Entity("AppProject.Models.Sizes", b =>
                 {
-                    b.Property<int>("SizeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("SizeName");
 
-                    b.HasKey("SizeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("AppProject.Models.SubCategory", b =>
                 {
-                    b.Property<int>("SubCategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CategoriesId");
+                    b.Property<int?>("CategoriesId");
 
                     b.Property<string>("SubName");
 
-                    b.HasKey("SubCategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoriesId");
 
                     b.ToTable("SubCategory");
                 });
 
-            modelBuilder.Entity("AppProject.Models.ConectTable", b =>
+            modelBuilder.Entity("AppProject.Models.ConnectTable", b =>
                 {
                     b.HasOne("AppProject.Models.Colors", "Color")
                         .WithMany("Details")
@@ -188,8 +176,8 @@ namespace AppProject.Migrations
             modelBuilder.Entity("AppProject.Models.Mart", b =>
                 {
                     b.HasOne("AppProject.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .WithOne("Mart")
+                        .HasForeignKey("AppProject.Models.Mart", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -197,16 +185,14 @@ namespace AppProject.Migrations
                 {
                     b.HasOne("AppProject.Models.SubCategory", "SubCategory")
                         .WithMany("Products")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SubCategoryId");
                 });
 
             modelBuilder.Entity("AppProject.Models.SubCategory", b =>
                 {
                     b.HasOne("AppProject.Models.Categories", "Categories")
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoriesId");
                 });
         }
     }

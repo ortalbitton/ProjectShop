@@ -19,17 +19,18 @@ namespace AppProject.Controllers
         }
 
         // GET: SubCategories
-        //public async Task<IActionResult> Index()
-        //{ 
-        //    var appProjectContext = _context.SubCategory.Include(s => s.Categories);
-        //    return View(await appProjectContext.ToListAsync());
-
-        //}
-
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index()
         {
-            return View( _context.SubCategory.Where(s => s.CategoriesId == id).ToList());
+            return View(await _context.SubCategory.ToListAsync());
         }
+
+        // GET: SubCategories/Index/1
+        //public IActionResult Index(int id)
+        //{
+        //    if (id != 0)
+        //        return View(_context.SubCategory.Where(s => s.Categories.Id == id).ToList());
+        //    return View(_context.SubCategory.ToList());
+        //}
 
         // GET: SubCategories/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -40,8 +41,7 @@ namespace AppProject.Controllers
             }
 
             var subCategory = await _context.SubCategory
-                .Include(s => s.Categories)
-                .SingleOrDefaultAsync(m => m.SubCategoryId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (subCategory == null)
             {
                 return NotFound();
@@ -50,10 +50,10 @@ namespace AppProject.Controllers
             return View(subCategory);
         }
 
+    
         // GET: SubCategories/Create
         public IActionResult Create()
         {
-            ViewData["CategoriesId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SubCategoryId,SubName,CategoriesId")] SubCategory subCategory)
+        public async Task<IActionResult> Create([Bind("Id,SubName")] SubCategory subCategory)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,6 @@ namespace AppProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["CategoriesId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", subCategory.CategoriesId);
             return View(subCategory);
         }
 
@@ -82,12 +81,11 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var subCategory = await _context.SubCategory.SingleOrDefaultAsync(m => m.SubCategoryId == id);
+            var subCategory = await _context.SubCategory.SingleOrDefaultAsync(m => m.Id == id);
             if (subCategory == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriesId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", subCategory.CategoriesId);
             return View(subCategory);
         }
 
@@ -96,9 +94,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SubCategoryId,SubName,CategoriesId")] SubCategory subCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SubName")] SubCategory subCategory)
         {
-            if (id != subCategory.SubCategoryId)
+            if (id != subCategory.Id)
             {
                 return NotFound();
             }
@@ -112,7 +110,7 @@ namespace AppProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubCategoryExists(subCategory.SubCategoryId))
+                    if (!SubCategoryExists(subCategory.Id))
                     {
                         return NotFound();
                     }
@@ -123,7 +121,6 @@ namespace AppProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["CategoriesId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", subCategory.CategoriesId);
             return View(subCategory);
         }
 
@@ -136,8 +133,7 @@ namespace AppProject.Controllers
             }
 
             var subCategory = await _context.SubCategory
-                .Include(s => s.Categories)
-                .SingleOrDefaultAsync(m => m.SubCategoryId == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (subCategory == null)
             {
                 return NotFound();
@@ -151,7 +147,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subCategory = await _context.SubCategory.SingleOrDefaultAsync(m => m.SubCategoryId == id);
+            var subCategory = await _context.SubCategory.SingleOrDefaultAsync(m => m.Id == id);
             _context.SubCategory.Remove(subCategory);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -159,7 +155,7 @@ namespace AppProject.Controllers
 
         private bool SubCategoryExists(int id)
         {
-            return _context.SubCategory.Any(e => e.SubCategoryId == id);
+            return _context.SubCategory.Any(e => e.Id == id);
         }
     }
 }
