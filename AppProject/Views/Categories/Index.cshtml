@@ -17,13 +17,14 @@
 
             $(".Department").hover(function () {
                 $(this).find('.SubContent').show();
+               // $(this).css(width                    = "width:100px;height:100px;background-color:white"
                 
             }, function () { $(this).find('.SubContent').hide(); });
 
             
             
             //הצגת מוצרים לפי שם מוצר מסוים בעת הקלדה 
-            $("#myInput").on("keyup", function () {
+            $("#myInput").on("keyup", function () {              
                 var value = $(this).val().toLowerCase();
                 $("#Product .col-md-3").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -71,7 +72,7 @@
                         @item.Name
                     </a>
 
-                    <ul class="SubContent" style="width:100px;height:100px;background-color:white">
+                    <ul class="SubContent" >
                         @foreach (var item2 in item.SubCategories)
                         {
                         <li><a>@item2.SubName</a></li>
