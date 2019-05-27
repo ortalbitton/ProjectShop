@@ -50,10 +50,10 @@ namespace AppProject.Controllers
         // GET: ConnectTables/Create
         public IActionResult Create()
         {
-            ViewData["ColorId"] = new SelectList(_context.Set<Colors>(), "Id", "Id");
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id");
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id");
-            ViewData["ProductesId"] = new SelectList(_context.Set<Productes>(), "Id", "Id");
-            ViewData["SizeId"] = new SelectList(_context.Set<Sizes>(), "Id", "Id");
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id");
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id");
             return View();
         }
 
@@ -70,10 +70,10 @@ namespace AppProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["ColorId"] = new SelectList(_context.Set<Colors>(), "Id", "Id", connectTable.ColorId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Set<Productes>(), "Id", "Id", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Set<Sizes>(), "Id", "Id", connectTable.SizeId);
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
             return View(connectTable);
         }
 
@@ -90,10 +90,10 @@ namespace AppProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["ColorId"] = new SelectList(_context.Set<Colors>(), "Id", "Id", connectTable.ColorId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Set<Productes>(), "Id", "Id", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Set<Sizes>(), "Id", "Id", connectTable.SizeId);
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
             return View(connectTable);
         }
 
@@ -129,10 +129,10 @@ namespace AppProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ColorId"] = new SelectList(_context.Set<Colors>(), "Id", "Id", connectTable.ColorId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Set<Productes>(), "Id", "Id", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Set<Sizes>(), "Id", "Id", connectTable.SizeId);
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
             return View(connectTable);
         }
 

@@ -50,11 +50,8 @@ namespace AppProject.Models
 
         }
 
-        //public DbSet<AppProject.Models.Categories> Categories { get; set; }
 
-        //public DbSet<AppProject.Models.SubCategory> SubCategory { get; set; }
-
-        //public DbSet<AppProject.Models.Productes> Productes { get; set; }
+        public DbSet<AppProject.Models.SubCategory> SubCategory { get; set; }
 
         public DbSet<AppProject.Models.Customer> Customer { get; set; }
 
@@ -68,15 +65,9 @@ namespace AppProject.Models
 
         public DbSet<AppProject.Models.Productes> Productes { get; set; }
 
-        public DbSet<AppProject.Models.SubCategory> SubCategory { get; set; }
 
         public DbSet<AppProject.Models.Categories> Categories { get; set; }
 
-        //public DbSet<AppProject.Models.Colors> Colors { get; set; }
-
-        //public DbSet<AppProject.Models.Sizes> Sizes { get; set; }
-
-        //public DbSet<AppProject.Models.ConectTable> ConectTable { get; set; }
 
     }
 }

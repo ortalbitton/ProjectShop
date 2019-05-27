@@ -4,53 +4,31 @@
     ViewData["Title"] = "Index";
 }
 
-<head>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //הצגת המוצרים על פי תת קטגוריה מסוימת  בעת לחיצה
-            $(".Text").click(function () {
-                var id = $(this).attr("id");
-                $.ajax({
-                    url: "Productes/Index?id" + id,
-                    method: "post",
-                    async: false,
-                    data: { id: id },
-                    success: function (data) {
-                        $("#Product").html(data);
-                    }
-                });
-            });
-        });
-
-    </script>
-</head>
-
-
-<ul class="Component">
-    @foreach (var item in Model)
+@foreach (var SubCategory in Model)
+{
+    @foreach (var Product in SubCategory.Products)
     {
-        <li class="ComponentItem">
-                <a class="Text" id="@item.Id">@item.SubName</a>
 
-                @*<div>
-                        <ul>
-                            <li class="link">
-                                <a asp-action="Edit" asp-route-id="@item.Id">Update</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </li>
-                        </ul>
-                    </div>*@
+        <div class="col-md-3">
+            <div class="product-item">
+                <img src="~/imagesweb/@Product.ImgId" alt="">                  
 
-        </li>
+                <div class="product-info">
+                    <a>@Product.ProductName</a>
+                    <h6>@Product.Price</h6>
+                    <a href="#" class="site-btn btn-line">Add TO Mart</a>
+                </div>
+            </div>
+        </div>
+
+        @*<div>
+            <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
+        </div>*@
 
     }
-
-    @*<li><a asp-action="Create">Create New</a></li>
-    <li><a asp-action="Index">List</a></li>*@
-</ul>
-
-
+}
 
 
 @*<h2>Index</h2>

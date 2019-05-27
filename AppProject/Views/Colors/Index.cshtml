@@ -4,38 +4,45 @@
     ViewData["Title"] = "Index";
 }
 
+
+
+<h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
 @foreach (var item in Model)
 {
-    <span>@item.ColorName</span>
+    <a href="#" class="d-flex color-item align-items-center">
+        <div class="color d-inline-block rounded-circle mr-2"></div> <span class="text-black">@item.ColorName</span>
+    </a>
+
 }
 
 
-    @*<h2>Index</h2>
 
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-        <table class="table">
-            <thead>
-                <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ColorName)
-                        </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ColorName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-        }
-            </tbody>
-        </table>*@
+@*<h2>Index</h2>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ColorName)
+                    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ColorName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

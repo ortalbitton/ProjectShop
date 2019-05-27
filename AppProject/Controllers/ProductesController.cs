@@ -15,30 +15,13 @@ namespace AppProject.Controllers
 
         public ProductesController(AppProjectContext context)
         {
-            _context = context; 
+            _context = context;    
         }
-     
-        public async Task<IActionResult> Index(int? id, string searchString)
+
+        // GET: Productes
+        public async Task<IActionResult> Index()
         {
-            if (id != null)
-                // GET: Productes/SubCategory/5
-                return View(await _context.Productes.Where(s => s.SubCategory.Id == id).ToListAsync());
-
-            // GET: All Productes
-            //return View(await _context.Productes.ToListAsync());
-
-
-
-            var productes = from m in _context.Productes
-                         select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                productes = productes.Where(s => s.ProductName.Contains(searchString) );
-
-            }
-
-            return View(await productes.ToListAsync());
+            return View(await _context.Productes.ToListAsync());
         }
 
         // GET: Productes/Details/5

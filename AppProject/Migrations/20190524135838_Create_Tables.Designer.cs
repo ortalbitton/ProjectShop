@@ -8,7 +8,7 @@ using AppProject.Models;
 namespace AppProject.Migrations
 {
     [DbContext(typeof(AppProjectContext))]
-    [Migration("20190515094839_Create_Tables")]
+    [Migration("20190524135838_Create_Tables")]
     partial class Create_Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

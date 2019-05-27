@@ -7,40 +7,90 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
-        //הצגת תת קטגוריה לפי קטגוריה מסוימת
+
         $(document).ready(function () {
 
-            $(".SubContent").hide();
-            //next אחיו
-            //$(".DepartmentLink").hover(function () { $(this).next('.SubContent').show(); }, function () { $(this).next('.SubContent').hide();});
-
+    //הצגת תת קטגוריה לפי קטגוריה מסוימת
+            $(".Component").hide();
 
             $(".Department").hover(function () {
-                $(this).find('.SubContent').show();
-               // $(this).css(width                    = "width:100px;height:100px;background-color:white"
-                
-            }, function () { $(this).find('.SubContent').hide(); });
+                $(this).find('.Component').show();
+                $(this).css('width', 90 + 'px');
+                $(this).css('height', 200 + 'px');
+                //$(this).css('background-color','red');
 
-            
-            
-            //הצגת מוצרים לפי שם מוצר מסוים בעת הקלדה 
-            $("#myInput").on("keyup", function () {              
-                var value = $(this).val().toLowerCase();
-                $("#Product .col-md-3").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+            }, function () {
+                $(this).find('.Component').hide();
+                $(this).css('width', 90 + 'px');
+                $(this).css('height', 37 + 'px');
+                //$(this).css('background-color', 'yellow');
+                });
+
+            $(".Text").click(function () {
+                var id = $(this).attr("id");
+                $.ajax({
+                    url: "SubCategories/Index?id" + id,
+                    method: "post",
+                    async: false,
+                    data: { id: id },
+                    success: function (data) {
+                        $("#Product").html(data);
+                    }
                 });
             });
+
+            //הצגת מוצרים לפי שם מוצר מסוים בעת לחיצה
+            //$("#Search").click( function () {
+            //    var value = $("#myInput").val().toLowerCase();
+            //    $("#Product .col-md-3").filter(function () {
+            //        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            //    });
+            //});
+
+
+
+            //$("#Search").click(function () {
+            //    // Retrieve the input field text and reset the count to zero
+            //    var filter = $("#myInput").val(),
+            //        count = 0;
+
+            //    // Loop through the comment list
+            //    $('#Product .col-md-3').each(function () {
+                
+
+            //        // If the list item does not contain the text phrase fade it out
+            //        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+            //            $(this).hide();// MY CHANGE
+                   
+
+
+            //            // Show the list item if the phrase matches and increase the count by 1
+            //        } else {
+            //            $(this).show();// MY CHANGE
+        
+            //            count++;
+                    
+            //        }
+               
+            //    });
+
+      
+            //});
+
+
+
         });
 
 
        // בעת טעינה יציג לי את כל המוצרים
         $(window).load(function () {
             $.ajax({
-                url: "Productes/Index",
+                url: "SubCategories/Index",
                 method: "post",
                 dataType: "html",
                 success: function (respon) {
-                    $("#Product").html(respon);
+                    $("#Product").html(respon)
                 }
             });
 
@@ -61,54 +111,68 @@
 
 <body>
     @*//לוגו*@
-    <header></header>
-    <nav id="MainNavigation" class="navbar">
-        <div class="Content MainNavigation container">
-            <ul class="nav">
-                @foreach (var item in Model)
-                {
-                <li class="Department">
-                    <a id="@item.Id" class="DepartmentLink" href="#">
-                        @item.Name
-                    </a>
+    <header>
+        <nav id="MainNavigation" class="navbar">
+            <div class="Content MainNavigation container">
+                <ul class="nav">
+                    @foreach (var Category in Model)
+                    {
+                        <li class="Department">
+                            <a id="@Category.Id" class="DepartmentLink" href="#">
+                                @Category.Name
+                            </a>
 
-                    <ul class="SubContent" >
-                        @foreach (var item2 in item.SubCategories)
-                        {
-                        <li><a>@item2.SubName</a></li>
-                        }
+                            <ul class="Component">
+                                @foreach (var SubCategory in Category.SubCategories)
+                                {
+                                    <li class="ComponentItem"><a class="Text" id="@SubCategory.Id">@SubCategory.SubName</a></li>
+                                }
 
-                    </ul>
+                            </ul>
 
-                    @*<div>
-                <ul>
-                <li class="link">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Update</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </li>
-            </ul>
-        </div>*@
-                </li>
-                }
+                        </li>
+                    }
 
-                @*<li><div><a asp-action="Create">Create New</a></div></li>*@
-
-            </ul>
+                </ul>
 
 
-            @*//תיבה שמשמשת לחיפוש-קשור למוצרים*@
-            <input id="myInput" type="text" placeholder="Search..">
+                <input id="myInput" class="form-control mr-sm-2" placeholder="Search.." />
+                <button id="Search" class="btn btn-outline-success my-2 my-sm-0">Search</button>
 
-        </div>
-    </nav>
+
+            </div>
+        </nav>
+    </header>
 
     <div class="container">
         <div class="row mb-5">
             <aside class="col-md-3 order-2 mb-5 mb-md-0">
-                <section id="Color"></section>
+                <div class="border p-4 rounded mb-4">
+                    <div class="mb-4">
+                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                        <div id="slider-range" class="border-primary"></div>
+                        <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
+                    </div>
+                    @*<div id="Size" class="mb-4">
+                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Size</h3>
+                        <label for="s_sm" class="d-flex">
+                            <input type="checkbox" id="s_sm" class="mr-2 mt-1"> <span class="text-black">Small (2,319)</span>
+                        </label>
+                        <label for="s_md" class="d-flex">
+                            <input type="checkbox" id="s_md" class="mr-2 mt-1"> <span class="text-black">Medium (1,282)</span>
+                        </label>
+                        <label for="s_lg" class="d-flex">
+                            <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">Large (1,392)</span>
+                        </label>
+                    </div>*@
+                    <div id="Color" class="mb-4">
+
+                    </div>
+                </div>
             </aside>
 
             <section id="Product" class="col-md-9 order-1">
+
             </section>
         </div>
     </div>
@@ -116,33 +180,32 @@
 
 </body>
 
-
 @*<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>*@
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

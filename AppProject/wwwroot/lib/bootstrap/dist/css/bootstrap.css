@@ -15,17 +15,20 @@ body {
 
 .MainNavigation .ComponentItem {
     height: 20px;
-    margin-top: 15px;
+    /*margin-top: 15px;*/
+  
 }
 
     .MainNavigation .ComponentItem .Text {
         cursor: pointer;
-        font-size: large;
+        font-size: medium;
+      
     }
 
 
 .MainNavigation li {
     list-style: none;
+ 
 }
 
 
@@ -40,9 +43,8 @@ body {
 /**/
 .MainNavigation .Component {
     float: right;
-    padding-top: 5px;
-    width: 192px;
-    height: 340px;
+    /*padding-top: 5px;*/
+    padding:10px 15px;
     position: relative;
     background-color: #fff;
     -webkit-background-clip: padding-box;
@@ -52,16 +54,6 @@ body {
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-}
-
-.MainNavigation .SubContainer {
-   border: none;
-     
-}
-
-.MainNavigation .SubContainer li .Text {
-            /*padding-right: 0;*/
-    font-size: large;
 }
 
 
@@ -4057,20 +4049,22 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     padding-right: 1px;
 }
 
- .nav > li {
+    .nav > li {
         display: block;
         padding: 0;
-        height: 37px;
         float: right;
         padding-right: 1px;
-        margin-left: 0;
-}
-
-    .nav > li > a {
-        display: block;
-        padding: 10px 15px;
-        font-size: x-large;
+        margin: 0;
+        width: 90px;
+        height:37px;
     }
+
+        .nav > li > a {
+            display: block;
+            padding: 10px 15px;
+            font-size: large;
+            margin: 0;
+        }
 
     .nav > li > a:hover,
     .nav > li > a:focus {
@@ -4252,11 +4246,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-right-radius: 0;
 }
 
+/**/
 .navbar {
-  position: relative;
-  min-height: 50px;
-  margin-bottom: 15px;
-  border: 1px solid transparent;
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    z-index: 1;
 }
 @media (min-width: 768px) {
   .navbar {
