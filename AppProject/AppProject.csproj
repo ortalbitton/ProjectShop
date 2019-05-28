@@ -99,7 +99,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Data\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>

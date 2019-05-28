@@ -5,108 +5,11 @@
 }
 
 <head>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-    //הצגת תת קטגוריה לפי קטגוריה מסוימת
-            $(".Component").hide();
-
-            $(".Department").hover(function () {
-                $(this).find('.Component').show();
-                $(this).css('width', 90 + 'px');
-                $(this).css('height', 200 + 'px');
-                //$(this).css('background-color','red');
+@section Scripts{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}
 
 
-            }, function () {
-                $(this).find('.Component').hide();
-                $(this).css('width', 90 + 'px');
-                $(this).css('height', 37 + 'px');
-                //$(this).css('background-color', 'yellow');
-                });
-
-            $(".Text").click(function () {
-                var id = $(this).attr("id");
-                $.ajax({
-                    url: "SubCategories/Index?id" + id,
-                    method: "post",
-                    async: false,
-                    data: { id: id },
-                    success: function (data) {
-                        $("#Product").html(data);
-                    }
-                });
-            });
-
-            //הצגת מוצרים לפי שם מוצר מסוים בעת לחיצה
-            //$("#Search").click( function () {
-            //    var value = $("#myInput").val().toLowerCase();
-            //    $("#Product .col-md-3").filter(function () {
-            //        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            //    });
-            //});
-
-
-
-            //$("#Search").click(function () {
-            //    // Retrieve the input field text and reset the count to zero
-            //    var filter = $("#myInput").val(),
-            //        count = 0;
-
-            //    // Loop through the comment list
-            //    $('#Product .col-md-3').each(function () {
-                
-
-            //        // If the list item does not contain the text phrase fade it out
-            //        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-            //            $(this).hide();// MY CHANGE
-                   
-
-
-            //            // Show the list item if the phrase matches and increase the count by 1
-            //        } else {
-            //            $(this).show();// MY CHANGE
-        
-            //            count++;
-                    
-            //        }
-               
-            //    });
-
-      
-            //});
-
-
-
-        });
-
-
-       // בעת טעינה יציג לי את כל המוצרים
-        $(window).load(function () {
-            $.ajax({
-                url: "SubCategories/Index",
-                method: "post",
-                dataType: "html",
-                success: function (respon) {
-                    $("#Product").html(respon)
-                }
-            });
-
-            $.ajax({
-                url: "Colors/Index",
-                method: "post",
-                dataType: "html",
-                success: function (respon) {
-                    $("#Color").html(respon);
-                }
-            });
-
-        });
-
-
-    </script>
 </head>
 
 <body>
@@ -136,9 +39,12 @@
                 </ul>
 
 
-                <input id="myInput" class="form-control mr-sm-2" placeholder="Search.." />
-                <button id="Search" class="btn btn-outline-success my-2 my-sm-0">Search</button>
-
+                @*<input id="myInput" class="form-control mr-sm-2" placeholder="Search.." />
+                    <button id="Search" class="btn btn-outline-success my-2 my-sm-0">Search</button>*@
+                <form>
+                    <input type="text" name="productname" placeholder="Search..">
+                    <button>Serach</button>
+                </form>
 
             </div>
         </nav>
@@ -154,26 +60,24 @@
                         <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
                     </div>
                     @*<div id="Size" class="mb-4">
-                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Size</h3>
-                        <label for="s_sm" class="d-flex">
-                            <input type="checkbox" id="s_sm" class="mr-2 mt-1"> <span class="text-black">Small (2,319)</span>
-                        </label>
-                        <label for="s_md" class="d-flex">
-                            <input type="checkbox" id="s_md" class="mr-2 mt-1"> <span class="text-black">Medium (1,282)</span>
-                        </label>
-                        <label for="s_lg" class="d-flex">
-                            <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">Large (1,392)</span>
-                        </label>
-                    </div>*@
+                            <h3 class="mb-3 h6 text-uppercase text-black d-block">Size</h3>
+                            <label for="s_sm" class="d-flex">
+                                <input type="checkbox" id="s_sm" class="mr-2 mt-1"> <span class="text-black">Small (2,319)</span>
+                            </label>
+                            <label for="s_md" class="d-flex">
+                                <input type="checkbox" id="s_md" class="mr-2 mt-1"> <span class="text-black">Medium (1,282)</span>
+                            </label>
+                            <label for="s_lg" class="d-flex">
+                                <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">Large (1,392)</span>
+                            </label>
+                        </div>*@
                     <div id="Color" class="mb-4">
 
                     </div>
                 </div>
             </aside>
 
-            <section id="Product" class="col-md-9 order-1">
-
-            </section>
+            <section id="Product" class="col-md-9 order-1"></section>
         </div>
     </div>
 

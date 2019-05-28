@@ -6,37 +6,37 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>ConnectTable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Color.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Mart)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Mart.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Productes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Productes.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Size.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <h4>ConnectTable</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Color.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Mart)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Mart.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Productes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Productes.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Size)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Size.Id)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>

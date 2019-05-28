@@ -19,13 +19,13 @@ namespace AppProject.Controllers
         }
 
         // GET: SubCategories
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(int? id, string productname)
         {
             var databaseContext = _context.SubCategory.Include(p => p.Products);
 
 
             if (id != null)
-                return PartialView(await databaseContext.Where(s => s.Id == id).ToListAsync());
+                return PartialView(await databaseContext.Where(s => s.Id == id).ToListAsync());               
 
             return PartialView(await databaseContext.ToListAsync());
 

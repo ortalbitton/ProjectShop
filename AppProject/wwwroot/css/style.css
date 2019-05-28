@@ -29,7 +29,7 @@ html {
 }
 
 .border {
-	border: 1px solid #dee2e6 !important;
+    border: 1px solid #dee2e6 !important;
 }
 .rounded {
 	border-radius: 0.25rem !important;
@@ -284,12 +284,12 @@ img {
 	max-width: 100%;
 }
 
-input:focus,
-select:focus,
-button:focus,
-textarea:focus {
-	outline: none;
-}
+    input:focus,
+    select:focus,
+    button:focus,
+    textarea:focus {
+        outline: none;
+    }
 
 a:hover,
 a:focus {
@@ -1136,7 +1136,7 @@ ol {
 }
 
 .page-info-section.page-info {
-	padding: 87px 0;
+   padding: 20px 0;
 }
 
 .page-info-section h2 {

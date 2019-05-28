@@ -32,14 +32,28 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var productes = await _context.Productes
+            var product = await _context.Productes.Include(m => m.Details)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (productes == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(productes);
+            var Colors = from color in _context.Colors
+                        join connect in product.Details
+                        on color.Id equals connect.ColorId
+                        select color.ColorName;
+
+            var sizes = from size in _context.Sizes
+                       join connect in product.Details
+                       on size.Id equals connect.SizeId
+                       select size.SizeName;
+
+
+            ViewData["ColorId"] = new SelectList(Colors);
+            ViewData["SizeId"] = new SelectList(sizes);
+
+            return View(product);
         }
 
         // GET: Productes/Create

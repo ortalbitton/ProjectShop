@@ -19,10 +19,9 @@ namespace AppProject.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
-        {
+        public async Task<IActionResult> Index(string productname)
+         {
             var databaseContext = _context.Categories.Include(s => s.SubCategories);
-
 
             return View(await databaseContext.ToListAsync());
  

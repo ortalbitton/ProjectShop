@@ -14,7 +14,7 @@
                 <img src="~/imagesweb/@Product.ImgId" alt="">                  
 
                 <div class="product-info">
-                    <a>@Product.ProductName</a>
+                    <a asp-controller="Productes" asp-action="Details" asp-route-id="@Product.Id">@Product.ProductName</a>
                     <h6>@Product.Price</h6>
                     <a href="#" class="site-btn btn-line">Add TO Mart</a>
                 </div>
