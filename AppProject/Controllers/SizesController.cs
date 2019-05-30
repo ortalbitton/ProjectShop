@@ -21,7 +21,7 @@ namespace AppProject.Controllers
         // GET: Sizes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sizes.ToListAsync());
+            return View(await _context.Sizes.Where(s=>s.SizeName=="XS" || s.SizeName=="S" || s.SizeName=="M" || s.SizeName=="L" || s.SizeName=="XL").ToListAsync());
         }
 
         // GET: Sizes/Details/5

@@ -56,6 +56,19 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
+figure img {
+    width: 472px;
+    height: 472px;  
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s; /* Safari */
+    transition: width 2s, height 2s, transform 2s;
+}
+
+    figure img:hover {
+        width: 300px;
+        height: 300px;
+        -webkit-transform: scale(0.7); /* Safari */
+        transform: scale(0.7);
+    }
 
 article,
 aside,

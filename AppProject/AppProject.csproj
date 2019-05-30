@@ -101,4 +101,10 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Productes\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

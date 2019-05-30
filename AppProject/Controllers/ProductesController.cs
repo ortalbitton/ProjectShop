@@ -21,7 +21,17 @@ namespace AppProject.Controllers
         // GET: Productes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Productes.ToListAsync());
+
+            return PartialView(await _context.Productes.ToListAsync());
+        }
+
+        public async Task<IActionResult> Search(string name)
+        {
+
+            if (name != null)
+                return Json(await _context.Productes.Where(s => s.ProductName.Contains(name)).ToListAsync());
+
+            return Json(await _context.Productes.ToListAsync());
         }
 
         // GET: Productes/Details/5

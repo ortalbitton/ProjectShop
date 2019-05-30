@@ -21,8 +21,8 @@ namespace AppProject.Controllers
         // GET: ConnectTables
         public async Task<IActionResult> Index(int? id)
         {
+            var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).Include(c => c.Productes).Include(c => c.Size);
 
-            var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).Include(c => c.Productes).Include(c => c.Size).Where(c=>c.Productes.Id==id);
 
             return View(await appProjectContext.ToListAsync());
         }
@@ -45,8 +45,6 @@ namespace AppProject.Controllers
             {
                 return NotFound();
             }
-
-
 
             return View(connectTable);
         }

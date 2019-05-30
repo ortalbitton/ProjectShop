@@ -21,7 +21,8 @@ namespace AppProject.Controllers
         // GET: Colors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Colors.ToListAsync());
+            var databaseContext = _context.Colors.Include(m => m.Details);
+            return PartialView(await databaseContext.ToListAsync());
         }
 
         // GET: Colors/Details/5
@@ -32,14 +33,15 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var colors = await _context.Colors
+            var colors = await _context.Colors.Include(m=>m.Details)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (colors == null)
             {
                 return NotFound();
             }
-
+         
             return View(colors);
+        
         }
 
         // GET: Colors/Create

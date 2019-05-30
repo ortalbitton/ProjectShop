@@ -8,26 +8,31 @@
 {
     @foreach (var Product in SubCategory.Products)
     {
-
         <div class="col-md-3">
             <div class="product-item">
-                <img src="~/imagesweb/@Product.ImgId" alt="">                  
+                <img src="~/imagesweb/@Product.ImgId" alt="" />
+
 
                 <div class="product-info">
                     <a asp-controller="Productes" asp-action="Details" asp-route-id="@Product.Id">@Product.ProductName</a>
                     <h6>@Product.Price</h6>
                     <a href="#" class="site-btn btn-line">Add TO Mart</a>
                 </div>
+
+                @*<div>
+                        <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
+                    </div>*@
+
+
             </div>
         </div>
 
-        @*<div>
-            <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
-        </div>*@
+
 
     }
+
 }
 
 

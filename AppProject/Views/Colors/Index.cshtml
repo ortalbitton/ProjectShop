@@ -4,17 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-
-
 <h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
 @foreach (var item in Model)
 {
-    <a href="#" class="d-flex color-item align-items-center">
-        <div class="color d-inline-block rounded-circle mr-2"></div> <span class="text-black">@item.ColorName</span>
-    </a>
-
+    
+    <form id="form">
+        <input id="@item.Id" class="mr-2 mt-1" type="checkbox" name="check1" value="color"><span class="text-black">@item.ColorName</span>
+    </form>
 }
-
 
 
 @*<h2>Index</h2>

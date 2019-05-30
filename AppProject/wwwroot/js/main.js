@@ -49,17 +49,17 @@ $(window).on('load', function() {
 	/*------------------
 		Hero Slider
 	--------------------*/
-	$('.hero-slider').owlCarousel({
-		loop: true,
-		nav: true,
-		navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-		dots: true,
-		mouseDrag: false,
-		animateOut: 'fadeOut',
-		animateIn: 'fadeIn',
-		items: 1,
-		autoplay: true
-	});
+	//$('.hero-slider').owlCarousel({
+	//	loop: true,
+	//	nav: true,
+	//	navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	//	dots: true,
+	//	mouseDrag: false,
+	//	animateOut: 'fadeOut',
+	//	animateIn: 'fadeIn',
+	//	items: 1,
+	//	autoplay: true
+	//});
 
 
 	/*------------------
@@ -95,11 +95,11 @@ $(window).on('load', function() {
 	/*------------------
 		ScrollBar
 	--------------------*/
-	$(".cart-table, .product-thumbs").niceScroll({
-		cursorborder:"",
-		cursorcolor:"#afafaf",
-		boxzoom:false
-	});
+	//$(".cart-table, .product-thumbs").niceScroll({
+	//	cursorborder:"",
+	//	cursorcolor:"#afafaf",
+	//	boxzoom:false
+	//});
 
 
 
