@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using Microsoft.AspNetCore.Session;
 
 namespace AppProject
 {
@@ -31,7 +32,9 @@ namespace AppProject
         {
             // Add framework services.
             services.AddMvc();
-          
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
 
             services.AddDbContext<AppProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AppProjectContext")));
@@ -53,7 +56,9 @@ namespace AppProject
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();      
+            app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

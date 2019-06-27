@@ -82,6 +82,7 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.5" />
@@ -102,7 +103,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Colors\Search.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Productes\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Sizes\Search.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

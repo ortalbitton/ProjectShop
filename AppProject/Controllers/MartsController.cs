@@ -21,8 +21,24 @@ namespace AppProject.Controllers
         // GET: Marts
         public async Task<IActionResult> Index()
         {
-            var appProjectContext = _context.Mart.Include(m => m.Customer);
+            
+            var appProjectContext = _context.Mart.Include(m => m.Customer).Include(m=>m.Details);
+
+            var Img= from  connect in _context.ConnectTable
+                     join s in _context.Productes.Include(s => s.Details)
+                     on connect.ProductesId equals s.Id
+                     select s.ImgId;
+
+            var q = from connect in _context.ConnectTable
+                    join s in _context.Productes.Include(s => s.Details)
+                    on connect.ProductesId equals s.Id
+                    select s.ProductName + " " + s.Price;
+
+            ViewData["Img"]= new SelectList(Img);
+            ViewData["ProductId"] = new SelectList(q);
+
             return View(await appProjectContext.ToListAsync());
+
         }
 
         // GET: Marts/Details/5

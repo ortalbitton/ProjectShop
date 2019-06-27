@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using AppProject.ViewModel;
 
 namespace AppProject.Controllers
 {
@@ -15,24 +16,35 @@ namespace AppProject.Controllers
 
         public ProductesController(AppProjectContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Productes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            ViewBag.products = _context.Productes.ToListAsync();
+            if (id != 0)
+                return PartialView(await _context.Productes.Where(s => s.SubCategory.Id == id).ToListAsync());
 
             return PartialView(await _context.Productes.ToListAsync());
-        }
 
+        }
+        //חיפוש לפי שם מוצר
         public async Task<IActionResult> Search(string name)
         {
-
             if (name != null)
                 return Json(await _context.Productes.Where(s => s.ProductName.Contains(name)).ToListAsync());
-
             return Json(await _context.Productes.ToListAsync());
         }
+
+        //חיפוש לפי טווח של מחיר מוצר
+        public async Task<IActionResult> SearchByPrice(double? minp, double? maxp)
+        {
+            var products = _context.Productes.Where(p => p.Price >= minp && p.Price <= maxp).ToListAsync();
+            return new JsonResult(await products);
+
+        }
+
 
         // GET: Productes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,9 +62,10 @@ namespace AppProject.Controllers
             }
 
             var Colors = from color in _context.Colors
-                        join connect in product.Details
-                        on color.Id equals connect.ColorId
-                        select color.ColorName;
+                         join connect in product.Details
+                         on color.Id equals connect.ColorId
+                         select color.ColorName;
+
 
             var sizes = from size in _context.Sizes
                        join connect in product.Details
@@ -60,32 +73,58 @@ namespace AppProject.Controllers
                        select size.SizeName;
 
 
-            ViewData["ColorId"] = new SelectList(Colors);
-            ViewData["SizeId"] = new SelectList(sizes);
+            ViewData["ColorId"] = new SelectList(Colors.Distinct());
+            ViewData["SizeId"] = new SelectList(sizes.Distinct());
 
             return View(product);
         }
 
         // GET: Productes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var Subs = from sub in _context.SubCategory
+                       select sub.SubName;
+
+            ViewData["SubId"] = new SelectList(await Subs.ToListAsync());
             return View();
         }
+
+
+
 
         // POST: Productes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId")] Productes productes)
+        public async Task<IActionResult> Create([Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategory")] Productes productes,string SubCategory)
         {
+
+            int ProductId = productes.Id;
+            string Productname = productes.ProductName;
+            // איך להציג את זה ב view 
+            string SubName = SubCategory;
+
+
+
             if (ModelState.IsValid)
             {
+                
                 _context.Add(productes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+     
             return View(productes);
+        }
+
+        [HttpPost]
+        public IActionResult TestFunction(Productes productes)
+        {
+         
+            return View();
+
         }
 
         // GET: Productes/Edit/5

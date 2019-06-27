@@ -19,15 +19,9 @@ namespace AppProject.Controllers
         }
 
         // GET: SubCategories
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.SubCategory.Include(p => p.Products);
-
-            if (id != null)
-                return PartialView(await databaseContext.Where(s => s.Id == id).ToListAsync());
-
-            return PartialView(await databaseContext.ToListAsync());
-
+            return PartialView(await _context.SubCategory.ToListAsync());
         }
 
         // GET: SubCategories/Details/5
@@ -38,7 +32,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var subCategory = await _context.SubCategory
+            var subCategory = await _context.SubCategory.Include(p=>p.Products)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (subCategory == null)
             {
@@ -67,6 +61,8 @@ namespace AppProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+
             return View(subCategory);
         }
 

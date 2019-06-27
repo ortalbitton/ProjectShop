@@ -2,42 +2,76 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/aos.css">
+</head>
+
 <body>
     @*//לוגו*@
     <header>
+        <img class="logo" src="~/imagesweb/logo.jpg" />
+        <form id="myform" asp-action="Search" asp-controller="Productes">
+            <input type="text" name="name" id="name" placeholder="Search..">
+        </form>
+
+        <ul>
+            <li id="Account"><a asp-action="Index" asp-controller="Customers">החשבון שלי</a></li>
+            <li id="Mart"> <a asp-action="Index" asp-controller="Marts">עגלה שלי</a></li>
+        </ul>
+
+
+    </header>
+
+
         <nav id="MainNavigation" class="navbar">
-            <div id="Categories" class="Content MainNavigation container">
+            <div id="Categories" class="Content MainNavigation">
 
             </div>
+
         </nav>
-    </header>
+    <a asp-action="Create" asp-controller="Productes">Create New</a>
 
     <div class="container">
         <div class="row mb-5">
-            <aside class="col-md-3 order-2 mb-5 mb-md-0">
-                <div class="border p-4 rounded mb-4">
-                    <div class="mb-4">
-                        <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                        <div id="slider-range" class="border-primary"></div>
-                        <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-                    </div>
-                    <div id="Size" class="mb-4">
-
-                    </div>
-                    <div id="Color" class="mb-4">
-
-                    </div>
+            <aside class="border p-4 rounded mb-4">
+                <div class="mb-4">
+                    <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                    <div id="slider-range"></div>
+                    <input type="text" name="text" id="amount" />
                 </div>
+
+
+                <div id="Size" class="mb-4">
+
+                </div>
+                <div id="Color" class="mb-4">
+
+                </div>
+
             </aside>
 
-            <section id="Product" class="col-md-9 order-1"></section>
+
+            <section id="Product" class="col-md-9"></section>
         </div>
     </div>
 
-
 </body>
+</html>
 
 @section Scripts{
+    <script src="~/js/HeaderLoad.js"></script>
     <script src="~/js/Home.js"></script>
-
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/main.js"></script>
 }

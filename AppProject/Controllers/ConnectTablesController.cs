@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using AppProject.ViewModel;
 
 namespace AppProject.Controllers
 {
@@ -19,13 +20,13 @@ namespace AppProject.Controllers
         }
 
         // GET: ConnectTables
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(int? colorid)
         {
             var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).Include(c => c.Productes).Include(c => c.Size);
 
-
             return View(await appProjectContext.ToListAsync());
         }
+
 
         // GET: ConnectTables/Details/5
         public async Task<IActionResult> Details(int? id)

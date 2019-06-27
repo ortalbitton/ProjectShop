@@ -4,13 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h3 class="mb-3 h6 text-uppercase text-black d-block">Sizes</h3>
+<h3 class="mb-3 h6 text-uppercase text-black d-block">Size</h3>
 @foreach (var item in Model)
 {
-    <form id="myform">
-        <input class="mr-2 mt-1" type="checkbox" name="check1" value="check1"><span class="text-black">@item.SizeName</span>
-    </form>
 
+    <div id="showCheckoutHistoryCheckbox">
+        <input id="@item.Id" class="mr-2 mt-1" type="checkbox" value="size"><span class="text-black">@item.SizeName</span>
+    </div>
 }
 
 @*<h2>Index</h2>

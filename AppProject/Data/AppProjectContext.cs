@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using AppProject.ViewModel;
 
 namespace AppProject.Models
 {
@@ -67,6 +68,9 @@ namespace AppProject.Models
 
 
         public DbSet<AppProject.Models.Categories> Categories { get; set; }
+
+
+        public DbSet<AppProject.ViewModel.ColorSizeProductVM> ColorProductVM { get; set; }
 
 
     }

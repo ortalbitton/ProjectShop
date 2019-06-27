@@ -7,11 +7,13 @@
 <h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
 @foreach (var item in Model)
 {
-    
-    <form id="form">
-        <input id="@item.Id" class="mr-2 mt-1" type="checkbox" name="check1" value="color"><span class="text-black">@item.ColorName</span>
-    </form>
+
+    <div id="showCheckoutHistoryCheckbox">
+        <input id="@item.Id" class="mr-2 mt-1" type="checkbox" value="color"><span class="text-black">@item.ColorName</span>
+    </div>
 }
+
+
 
 
 @*<h2>Index</h2>

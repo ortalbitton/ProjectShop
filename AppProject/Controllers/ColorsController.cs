@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using AppProject.ViewModel;
 
 namespace AppProject.Controllers
 {
@@ -22,7 +23,25 @@ namespace AppProject.Controllers
         public async Task<IActionResult> Index()
         {
             var databaseContext = _context.Colors.Include(m => m.Details);
+
+
             return PartialView(await databaseContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Search(int? colorid)
+        {
+
+            var product = await _context.Colors.Include(m => m.Details)
+                .SingleOrDefaultAsync(m => m.Id == colorid);
+
+            //קשר בין צבע למוצר
+            var Productes = from pro in _context.Productes
+                            join connect in product.Details
+                            on pro.Id equals connect.ColorId
+                            select new ColorSizeProductVM() { Id=connect.ProductesId,ImgId=pro.ImgId,ProductName=pro.ProductName,Price=pro.Price };
+        
+
+            return View(await Productes.ToListAsync());
         }
 
         // GET: Colors/Details/5
@@ -39,7 +58,7 @@ namespace AppProject.Controllers
             {
                 return NotFound();
             }
-         
+
             return View(colors);
         
         }
