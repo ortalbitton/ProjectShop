@@ -103,11 +103,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Colors\Search.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    <Content Update="Views\Productes\Search.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Productes\Search.cshtml">
+    <Content Update="Views\Productes\OrderByPrice.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Sizes\Search.cshtml">

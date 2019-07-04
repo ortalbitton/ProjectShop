@@ -8,14 +8,13 @@
 @foreach (var Product in Model)
 {
 
-
     <div class="col-md-3">
         <div class="product-item">
             <img src="~/imagesweb/@Product.ImgId" alt="" />
 
             <div class="product-info">
                 <a asp-controller="Productes" asp-action="Details" asp-route-id="@Product.Id">@Product.ProductName</a>
-                <p>@Product.Price</p>
+                <h6>@Product.Price</h6>
                 <a href="#" class="site-btn btn-line">Add TO Mart</a>
             </div>
         </div>

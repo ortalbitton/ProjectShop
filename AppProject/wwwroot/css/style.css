@@ -671,10 +671,7 @@ a {
   margin-right: 10px; }
 
 .site-blocks-table {
-    overflow: auto;
-    /*overflow: hidden;
-    width: 500px;
-    border: 1px solid black;*/
+    overflow: auto;   
 }
   .site-blocks-table .product-thumbnail {
     width: 200px; }

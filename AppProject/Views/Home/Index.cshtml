@@ -21,21 +21,27 @@
         </form>
 
         <ul>
-            <li id="Account"><a asp-action="Index" asp-controller="Customers">החשבון שלי</a></li>
-            <li id="Mart"> <a asp-action="Index" asp-controller="Marts">עגלה שלי</a></li>
+            <li id="Account"><a asp-action="Index" asp-controller="Customers">כניסה</a></li>
+            <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
+            <li id="ShoppingCart">
+                <a asp-action="Index" asp-controller="Marts">עגלה שלי</a>
+                <div id="alert">סל הקניות שלך ריק</div>
+            </li>
         </ul>
 
 
     </header>
 
 
-        <nav id="MainNavigation" class="navbar">
-            <div id="Categories" class="Content MainNavigation">
+    <nav id="MainNavigation" class="navbar">
+        <div id="Categories" class="Content MainNavigation">
 
-            </div>
+        </div>
 
-        </nav>
+    </nav>
     <a asp-action="Create" asp-controller="Productes">Create New</a>
+    <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
+
 
     <div class="container">
         <div class="row mb-5">
@@ -56,6 +62,19 @@
 
             </aside>
 
+            <div class="row align">
+                <div class="col-md-12 mb-5">
+                    <div class="d-flex">
+                        <div class="btn-group show">
+                            <button class="btn btn-white btn-sm dropdown-toggle px-4" id="dropdownMenuReference" aria-expanded="true" type="button" data-toggle="dropdown">Reference</button>
+                            <div class="dropdown-menu show" aria-labelledby="dropdownMenuReference" x-placement="bottom-start">
+                                <a asp-controller="Productes" asp-action="OrderByPrice" class="dropdown-item">Price, low to high</a>
+                                <a class="dropdown-item" href="#">Price, high to low</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <section id="Product" class="col-md-9"></section>
         </div>

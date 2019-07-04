@@ -59,7 +59,7 @@ namespace AppProject.Controllers
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             return View(customer);
         }

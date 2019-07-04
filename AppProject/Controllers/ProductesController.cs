@@ -22,7 +22,6 @@ namespace AppProject.Controllers
         // GET: Productes
         public async Task<IActionResult> Index(int id)
         {
-            ViewBag.products = _context.Productes.ToListAsync();
             if (id != 0)
                 return PartialView(await _context.Productes.Where(s => s.SubCategory.Id == id).ToListAsync());
 
@@ -42,6 +41,18 @@ namespace AppProject.Controllers
         {
             var products = _context.Productes.Where(p => p.Price >= minp && p.Price <= maxp).ToListAsync();
             return new JsonResult(await products);
+
+        }
+
+        public async Task<IActionResult> OrderByPrice()
+        {
+
+            var results = from p in _context.Productes
+                          group p.Price by p.Id into g
+                          select new { Id = g.Key, Prices = g.ToList() };
+            ViewData["product"] = new SelectList(results);
+
+            return PartialView(await _context.Productes.ToListAsync());
 
         }
 

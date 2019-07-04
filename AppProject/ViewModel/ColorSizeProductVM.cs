@@ -17,9 +17,5 @@ namespace AppProject.ViewModel
 
         public double Price { get; set; }
 
-        internal Task<string> ToListAsync()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using AppProject.ViewModel;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace AppProject.Controllers
 {
@@ -22,7 +23,7 @@ namespace AppProject.Controllers
         // GET: Colors
         public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.Colors.Include(m => m.Details);
+            var databaseContext = _context.Colors.Include(m => m.Details).ThenInclude(ps => ps.Productes);
 
 
             return PartialView(await databaseContext.ToListAsync());
@@ -31,17 +32,22 @@ namespace AppProject.Controllers
         public async Task<IActionResult> Search(int? colorid)
         {
 
-            var product = await _context.Colors.Include(m => m.Details)
+            var product = await _context.Colors.Include(m => m.Details).ThenInclude(ps => ps.Productes)
                 .SingleOrDefaultAsync(m => m.Id == colorid);
 
-            //קשר בין צבע למוצר
-            var Productes = from pro in _context.Productes
-                            join connect in product.Details
-                            on pro.Id equals connect.ColorId
-                            select new ColorSizeProductVM() { Id=connect.ProductesId,ImgId=pro.ImgId,ProductName=pro.ProductName,Price=pro.Price };
-        
+            ////קשר בין צבע למוצר
+            var Products = from pro in _context.Productes
+                           join connect in product.Details
+                           on pro.Id equals connect.ColorId
+                           select pro;
+            //select new ColorSizeProductVM() { Id = connect.ProductesId, ImgId = pro.ImgId, ProductName = pro.ProductName, Price = pro.Price };
 
-            return View(await Productes.ToListAsync());
+            //var x = (from p in Products
+            //         select new Productes() { Id =p.Id , ImgId=p.ImgId , ProductName=p.ProductName , Price= p.Price }).Distinct();
+ 
+
+            //למה תוצאת השאילתה לא מראה
+            return View(Products.Distinct(new StudentNameComparer()));
         }
 
         // GET: Colors/Details/5

@@ -1355,8 +1355,9 @@ h6,
     font-family: inherit;
     font-weight: 500;
     line-height: normal;
-    color: inherit; 
-    font-size:16px;
+    color: inherit;
+    font-size: 16px;
+    text-align: right;
 }
 
 
@@ -2113,6 +2114,7 @@ pre code {
 @media (min-width: 992px) {
   .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
     float: right;
+    margin-top:5%;
   }
   .col-md-12 {
     width: 100%;
@@ -3865,6 +3867,7 @@ tbody.collapse.in {
 }
 .btn-group > .btn:first-child {
   margin-left: 0;
+  position:absolute;
 }
 .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
   border-top-right-radius: 0;
@@ -3893,6 +3896,7 @@ tbody.collapse.in {
 .btn-group .dropdown-toggle:active,
 .btn-group.open .dropdown-toggle {
   outline: 0;
+  z-index:0;
 }
 .btn-group > .btn + .dropdown-toggle {
   padding-right: 8px;
@@ -3992,9 +3996,10 @@ tbody.collapse.in {
   pointer-events: none;
 }
 .input-group {
-  position: relative;
-  display: table;
-  border-collapse: separate;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    text-align:right;
 }
 .input-group[class*="col-"] {
   float: none;
