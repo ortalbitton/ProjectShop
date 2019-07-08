@@ -20,7 +20,7 @@ namespace AppProject.Controllers
         }
 
         // GET: ConnectTables
-        public async Task<IActionResult> Index(int? colorid)
+        public async Task<IActionResult> Index()
         {
             var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).Include(c => c.Productes).Include(c => c.Size);
 
@@ -55,8 +55,8 @@ namespace AppProject.Controllers
         {
             ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id");
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id");
-            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id");
-            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id");
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName");
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName");
             return View();
         }
 
@@ -79,6 +79,9 @@ namespace AppProject.Controllers
             ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
             return View(connectTable);
         }
+
+ 
+
 
         // GET: ConnectTables/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -152,7 +155,7 @@ namespace AppProject.Controllers
                 .Include(c => c.Mart)
                 .Include(c => c.Productes)
                 .Include(c => c.Size)
-                .SingleOrDefaultAsync(m => m.ProductesId == id);
+                .FirstOrDefaultAsync(m => m.ProductesId == id);
             if (connectTable == null)
             {
                 return NotFound();
@@ -166,10 +169,10 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var connectTable = await _context.ConnectTable.SingleOrDefaultAsync(m => m.ProductesId == id);
+            var connectTable = await _context.ConnectTable.FirstOrDefaultAsync(m => m.ProductesId == id);
             _context.ConnectTable.Remove(connectTable);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Marts");
         }
 
         private bool ConnectTableExists(int id)

@@ -8,7 +8,7 @@ using AppProject.Models;
 namespace AppProject.Migrations
 {
     [DbContext(typeof(AppProjectContext))]
-    [Migration("20190524135838_Create_Tables")]
+    [Migration("20190706204429_Create_Tables")]
     partial class Create_Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,7 +114,7 @@ namespace AppProject.Migrations
 
                     b.Property<string>("ProductName");
 
-                    b.Property<int?>("SubCategoryId");
+                    b.Property<int>("SubCategoryId");
 
                     b.HasKey("Id");
 
@@ -140,7 +140,7 @@ namespace AppProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CategoriesId");
+                    b.Property<int>("CategoriesId");
 
                     b.Property<string>("SubName");
 
@@ -186,14 +186,16 @@ namespace AppProject.Migrations
                 {
                     b.HasOne("AppProject.Models.SubCategory", "SubCategory")
                         .WithMany("Products")
-                        .HasForeignKey("SubCategoryId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AppProject.Models.SubCategory", b =>
                 {
                     b.HasOne("AppProject.Models.Categories", "Categories")
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoriesId");
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

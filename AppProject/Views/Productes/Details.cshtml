@@ -11,24 +11,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/jquery-ui.css">
     <link rel="stylesheet" href="~/css/aos.css">
+    <link rel="stylesheet" href="~/css/style.css">
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
-    <!-- Page Info -->
     <div class="page-info-section page-info">
         <div class="container">
             <h1>Details</h1>
         </div>
     </div>
 
-    <!-- Page Info end -->
-    <!-- Page -->
+
     <div class="page-area product-page spad">
+
         <div class="container">
             <div class="row">
 
@@ -37,7 +33,7 @@
                         <img class="product-big-img" src="~/imagesweb/@Html.DisplayFor(model => model.ImgId)" alt="">
                     </figure>
                 </div>
-
+     
                 <div class="col-md-6">
                     <div class="product-content">
                         <h2>@Html.DisplayFor(model => model.ProductName)</h2>
@@ -75,11 +71,12 @@
                             </div>
 
 
-                            <a href="#" class="site-btn btn-line">ADD TO CART</a>
+                            <a asp-action="Index" asp-controller="Marts" class="site-btn btn-line">ADD TO MART</a>
                         </div>
                     </div>
 
                 </div>
+            
             </div>
             <div class="product-details">
                 <div class="row">
@@ -206,6 +203,7 @@
                     </div>
                 </div>*@
         </div>
+
     </div>
     <!-- Page end -->
     <!-- Footer top section -->
@@ -278,6 +276,7 @@
         </section>*@
 </body>
 </html>
+
 
 @*<h2>Details</h2>
 

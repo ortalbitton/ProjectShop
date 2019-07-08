@@ -19,24 +19,24 @@
 </head>
 <body>
 
-        <header>
-            <img class="logo" src="~/imagesweb/logo.jpg" />
-            <form id="myform" asp-action="Search" asp-controller="Productes">
-                <input type="text" name="name" id="name" placeholder="Search..">
-            </form>
+    <header>
+        <img class="logo" src="~/imagesweb/logo.jpg" />
+    </header>
 
-        </header>
+    <div class="site-section">
+        <div class="container">
 
-
-        <nav id="MainNavigation" class="navbar">
-            <div id="Categories" class="Content MainNavigation">
-
-            </div>
-
-        </nav>
-
-        <div class="site-section">
-            <div class="container">
+            @if (!ViewBag.ConnectClient)
+            {
+                <div style="float:right;position:relative">:נא להתחבר קודם</div>
+                <div style="position:absolute;margin-top:25px;">
+                    <div id="Account"><a asp-action="LogIn" asp-controller="Customers">לקוח קיים</a></div>
+                    <div id="Account"><a asp-action="Create" asp-controller="Customers">לקוח חדש</a></div>
+                </div>
+            }
+            else
+            {
+ 
                 <div class="row mb-5">
                     <form class="col-md-12" method="post">
                         <div class="site-blocks-table">
@@ -50,13 +50,14 @@
                                         <th class="product-remove">Remove</th>
                                     </tr>
                                 </thead>
-                                <tbody>
 
+                                <tbody>
                                     @foreach (var item in Model)
                                     {
+                                    
                                         @foreach (var connect in item.Details)
                                         {
-
+                                      
                                             <tr>
                                                 <td class="product-thumbnail">
                                                     <img src="~/imagesweb/@connect.Productes.ImgId" alt="Image" class="img-fluid">
@@ -76,39 +77,33 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                                                <td><a asp-action="Delete" asp-controller="ConnectTables" asp-route-id="@connect.Productes.Id" class="btn btn-primary height-auto btn-sm">X</a></td>
                                             </tr>
-                                        }
+                                               
+                                            }
                                     }
                                 </tbody>
                             </table>
                         </div>
                     </form>
+
                 </div>
                 @*//לקחתי עיצוב מmax*@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row mb-5">
+
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
+                                @*<a asp-action="Edit" asp-controller="ConnectTables" class="btn btn-primary btn-sm btn-block">Update Cart</a>*@
                             </div>
+
                             <div class="col-md-6">
-                                <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</a>
                             </div>
-                        </div>
-                        <div class="row">
-                            @*<div class="col-md-12">
-                                <label class="text-black h4" for="coupon">Coupon</label>
-                                <p>Enter your coupon code if you have one.</p>
-                            </div>*@
-                            @*<div class="col-md-8 mb-3 mb-md-0">
-                                <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-                            </div>*@
-                            @*<div class="col-md-4">
-                                <button class="btn btn-primary btn-sm px-4">Apply Coupon</button>
-                            </div>*@
                         </div>
                     </div>
+
+
                     <div class="col-md-6 pl-5">
                         <div class="row justify-content-end">
                             <div class="col-md-7">
@@ -122,7 +117,7 @@
                                         <span class="text-black">Subtotal</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong class="text-black">$230.00</strong>
+                                        <strong class="text-black"> @ViewBag.total</strong>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
@@ -130,53 +125,64 @@
                                         <span class="text-black">Total</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong class="text-black">$230.00</strong>
+                                        <strong class="text-black"> @ViewBag.total</strong>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                        <img src="~/imagesweb/ajax-loader.gif" class="hide loader" />
+                                        <button class="btn btn-primary btn-lg btn-block btn-loader">Proceed To Checkout</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
+         
+            }
         </div>
+    </div>
+            
 </body>
 </html>
 
 @section Scripts{
-    <script src="~/js/HeaderLoad.js"></script>
+    <script src="~/js/Mart.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/main.js"></script>
 }
+@*<h2>Index</h2>
 
-    @*<h2>Index</h2>
-
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Customer)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Customer.Id)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-        }
-            </tbody>
-        </table>*@
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

@@ -19,6 +19,7 @@ namespace AppProject.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             //one to one
             modelBuilder.Entity<Customer>()
            .HasOne<Mart>(s => s.Mart)
@@ -49,6 +50,8 @@ namespace AppProject.Models
               .WithMany(t => t.Details)
               .HasForeignKey(pt => pt.MartId);
 
+    
+
         }
 
 
@@ -69,8 +72,6 @@ namespace AppProject.Models
 
         public DbSet<AppProject.Models.Categories> Categories { get; set; }
 
-
-        public DbSet<AppProject.ViewModel.ColorSizeProductVM> ColorProductVM { get; set; }
 
 
     }

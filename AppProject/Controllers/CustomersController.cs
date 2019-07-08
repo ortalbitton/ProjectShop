@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AppProject.Controllers
 {
@@ -21,6 +22,7 @@ namespace AppProject.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Customer.ToListAsync());
         }
 
@@ -61,6 +63,35 @@ namespace AppProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index","Home");
             }
+            return View(customer);
+        }
+
+        public IActionResult LogIn()
+        {
+            ViewBag.Fail = false;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn([Bind("Id,Mail,Password")] Customer customer)
+        {
+            var q = (from u in _context.Customer
+                     where u.Mail == customer.Mail && u.Password == customer.Password
+                     select u);
+
+            //כשיש התאמה
+            if (q.ToList().Count > 0)
+            {
+
+                HttpContext.Session.SetString("Mail", customer.Mail.ToString());
+                //HttpContext.Session.SetString("Id", customer.Mart.Id.ToString());
+                return RedirectToAction("Index", "Home");
+
+            }
+
+            ViewBag.Fail = true;
+
             return View(customer);
         }
 

@@ -9,7 +9,7 @@ namespace AppProject.Models
 {
     public class Mart
     {
-
+ 
         public int Id { get; set; }
 
         public Customer Customer { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using AppProject.ViewModel;
+using Microsoft.AspNetCore.Http;
 
 namespace AppProject.Controllers
 {
@@ -22,12 +23,22 @@ namespace AppProject.Controllers
         // GET: Productes
         public async Task<IActionResult> Index(int id)
         {
+
             if (id != 0)
                 return PartialView(await _context.Productes.Where(s => s.SubCategory.Id == id).ToListAsync());
 
             return PartialView(await _context.Productes.ToListAsync());
 
         }
+
+        public async Task<IActionResult> List()
+        {
+
+            return View(await _context.Productes.Include(p=>p.SubCategory).ToListAsync());
+
+        }
+
+
         //חיפוש לפי שם מוצר
         public async Task<IActionResult> Search(string name)
         {
@@ -46,16 +57,18 @@ namespace AppProject.Controllers
 
         public async Task<IActionResult> OrderByPrice()
         {
-
             var results = from p in _context.Productes
-                          group p.Price by p.Id into g
-                          select new { Id = g.Key, Prices = g.ToList() };
+                          group p by (p.Price / 50) into groups
+                          select new { Id = groups.Key, Text = groups.ToList() };
+
+
+
+
             ViewData["product"] = new SelectList(results);
 
             return PartialView(await _context.Productes.ToListAsync());
 
         }
-
 
         // GET: Productes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -90,43 +103,32 @@ namespace AppProject.Controllers
             return View(product);
         }
 
+
         // GET: Productes/Create
         public async Task<IActionResult> Create()
         {
-            var Subs = from sub in _context.SubCategory
-                       select sub.SubName;
-
-            ViewData["SubId"] = new SelectList(await Subs.ToListAsync());
+            ViewData["SubId"] = new SelectList(await _context.SubCategory.ToListAsync(), "Id", "SubName");
             return View();
         }
 
-
-
-
+ 
         // POST: Productes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategory")] Productes productes,string SubCategory)
+        public async Task<IActionResult> Create([Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategoryId")] Productes productes)
         {
 
-            int ProductId = productes.Id;
-            string Productname = productes.ProductName;
-            // איך להציג את זה ב view 
-            string SubName = SubCategory;
-
-
-
-            if (ModelState.IsValid)
-            {
-                
-                _context.Add(productes);
+  
+          if (ModelState.IsValid)
+            { 
+              _context.Add(productes);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
-     
+            ViewData["SubId"] = new SelectList(await _context.SubCategory.ToListAsync(), "Id", "SubName", productes.SubCategory.SubName);
             return View(productes);
         }
 
@@ -146,11 +148,14 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var productes = await _context.Productes.SingleOrDefaultAsync(m => m.Id == id);
+            var productes = await _context.Productes.Include(m=>m.SubCategory).SingleOrDefaultAsync(m => m.Id == id);
             if (productes == null)
             {
                 return NotFound();
             }
+
+
+            ViewData["SubIdE"] = new SelectList(_context.SubCategory.Where(c => c.Id == productes.SubCategoryId), "Id", "SubName");
             return View(productes);
         }
 
@@ -159,7 +164,7 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId")] Productes productes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategoryId")] Productes productes)
         {
             if (id != productes.Id)
             {
@@ -184,8 +189,9 @@ namespace AppProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
+            ViewData["SubIdE"] = new SelectList(await _context.SubCategory.ToListAsync(), "Id", "Name", productes.SubCategory.SubName);
             return View(productes);
         }
 
@@ -215,7 +221,7 @@ namespace AppProject.Controllers
             var productes = await _context.Productes.SingleOrDefaultAsync(m => m.Id == id);
             _context.Productes.Remove(productes);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         private bool ProductesExists(int id)

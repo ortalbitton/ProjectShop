@@ -74,7 +74,7 @@ namespace AppProject.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoriesId = table.Column<int>(nullable: true),
+                    CategoriesId = table.Column<int>(nullable: false),
                     SubName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -85,7 +85,7 @@ namespace AppProject.Migrations
                         column: x => x.CategoriesId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +117,7 @@ namespace AppProject.Migrations
                     ImgId = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
-                    SubCategoryId = table.Column<int>(nullable: true)
+                    SubCategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,7 +127,7 @@ namespace AppProject.Migrations
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategory",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

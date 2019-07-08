@@ -4,25 +4,29 @@
     ViewData["Title"] = "Index";
 }
 
+
 @foreach (var Product in ViewBag.product)
 {
-    <div class="col-md-4">
-        <div class="product-item">
-            @*<img src="~/imagesweb/@Product.ImgId" >*@
-            <div class="product-info">
-                @*<a asp-controller="Productes" asp-action="Details">@Product.ProductName</a>*@
-                <p name="productname">@Product.Text</p>
-                <a href="#" class="site-btn btn-line">Add TO Mart</a>
-            </div>
+  
+  
+        <div class="col-md-4">
+            <div class="product-item">
+                @*<img src="~/imagesweb/@Product.ImgId">*@
+                <div class="product-info">
+                    @*<a asp-controller="Productes" asp-action="Details">@Product.ProductName</a>*@
+                    <p name="productname">@Product.Text</p>
+                    <a href="#" class="site-btn btn-line">Add TO Mart</a>
+                </div>
 
-            @*<div>
-                <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
-        </div>*@
-       
+                @*<div>
+                            <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
+                    </div>*@
+
+            </div>
         </div>
-    </div>
+    
 }
 
 

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using AppProject.ViewModel;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace AppProject.Controllers
 {
@@ -38,16 +37,14 @@ namespace AppProject.Controllers
             ////קשר בין צבע למוצר
             var Products = from pro in _context.Productes
                            join connect in product.Details
-                           on pro.Id equals connect.ColorId
-                           select pro;
-            //select new ColorSizeProductVM() { Id = connect.ProductesId, ImgId = pro.ImgId, ProductName = pro.ProductName, Price = pro.Price };
+                           on pro.Id equals connect.ProductesId
+                           select new ProductByColorSizeVM() { Id = connect.ProductesId, ImgId = pro.ImgId, ProductName = pro.ProductName, Price = pro.Price };
 
             //var x = (from p in Products
             //         select new Productes() { Id =p.Id , ImgId=p.ImgId , ProductName=p.ProductName , Price= p.Price }).Distinct();
- 
 
             //למה תוצאת השאילתה לא מראה
-            return View(Products.Distinct(new StudentNameComparer()));
+            return View(await Products.ToListAsync());
         }
 
         // GET: Colors/Details/5
@@ -58,7 +55,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var colors = await _context.Colors.Include(m=>m.Details)
+            var colors = await _context.Colors
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (colors == null)
             {
@@ -66,7 +63,6 @@ namespace AppProject.Controllers
             }
 
             return View(colors);
-        
         }
 
         // GET: Colors/Create

@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AppProject.Controllers
 {
     public class MartsController : Controller
     {
         private readonly AppProjectContext _context;
-        public List<string> Imgs;
 
         public MartsController(AppProjectContext context)
         {
@@ -24,11 +24,21 @@ namespace AppProject.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var appProjectContext = _context.Mart.Include(m => m.Customer).Include(p => p.Details).ThenInclude(ps => ps.Productes);   
-                                  
+            var appProjectContext = _context.Mart.Include(m => m.Customer).Include(p => p.Details).ThenInclude(ps => ps.Productes);
+
+            ViewBag.Mail = HttpContext.Session.GetString("Mail");
+
+            if (ViewBag.Mail==null)
+                ViewBag.ConnectClient = false;
+            else
+                ViewBag.ConnectClient = true;
+
+            ViewBag.total = _context.ConnectTable.Sum(item => item.Productes.Price * item.Productes.AmountOfOrders);
+
             return View(await appProjectContext.ToListAsync());
 
         }
+
 
         // GET: Marts/Details/5
         public async Task<IActionResult> Details(int? id)

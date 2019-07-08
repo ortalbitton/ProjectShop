@@ -76,6 +76,14 @@
     <Compile Remove="Migrations\20190524122032_s.Designer.cs" />
     <Compile Remove="Migrations\20190524122504_Create_Tables.cs" />
     <Compile Remove="Migrations\20190524122504_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190524135838_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190524135838_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190705081405_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190705081405_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190705082319_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190705082319_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190706204204_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190706204204_Create_Tables.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,13 +111,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Productes\Search.cshtml">
+    <Content Update="Views\Categories\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Colors\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ConnectTables\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Customers\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Customers\LogIn.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Productes\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Productes\OrderByPrice.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Sizes\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Sizes\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\SubCategories\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

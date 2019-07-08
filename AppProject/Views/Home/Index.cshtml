@@ -12,78 +12,86 @@
     <link rel="stylesheet" href="~/css/aos.css">
 </head>
 
-<body>
-    @*//לוגו*@
-    <header>
-        <img class="logo" src="~/imagesweb/logo.jpg" />
-        <form id="myform" asp-action="Search" asp-controller="Productes">
-            <input type="text" name="name" id="name" placeholder="Search..">
-        </form>
+<body onload="myFunction()" style="margin:0;">
 
-        <ul>
-            <li id="Account"><a asp-action="Index" asp-controller="Customers">כניסה</a></li>
-            <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
-            <li id="ShoppingCart">
-                <a asp-action="Index" asp-controller="Marts">עגלה שלי</a>
-                <div id="alert">סל הקניות שלך ריק</div>
-            </li>
-        </ul>
+    <div id="loader"></div>
 
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+        <header>
+            <img class="logo" src="~/imagesweb/logo.jpg" />
+            <form id="myform" asp-action="Search" asp-controller="Productes">
+                <input type="text" name="name" id="name" placeholder="Search..">
+            </form>
 
-    </header>
+            <ul>
+                <li id="Account"><a asp-action="LogIn" asp-controller="Customers">כניסה</a></li>
+                <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
+                <li id="ShoppingCart"><a asp-action="Index" asp-controller="Marts">עגלה שלי</a></li>
+            </ul>
 
 
-    <nav id="MainNavigation" class="navbar">
-        <div id="Categories" class="Content MainNavigation">
+        </header>
 
+        <nav id="MainNavigation" class="navbar">
+            <div id="Categories" class="Content MainNavigation">
+
+            </div>
+        </nav>
+
+
+        <div>
+            <ul>
+                <li><a asp-action="List" asp-controller="Categories">עריכת מחלקת קטגוריות</a></li>
+                <li> <a asp-action="List" asp-controller="SubCategories">עריכת מחלקת תת קטגוריה</a></li>
+                <li> <a asp-action="List" asp-controller="Productes">עריכת מחלקת מוצרים</a></li>
+            </ul>
         </div>
-
-    </nav>
-    <a asp-action="Create" asp-controller="Productes">Create New</a>
-    <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
+    
+        <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
 
 
-    <div class="container">
-        <div class="row mb-5">
-            <aside class="border p-4 rounded mb-4">
-                <div class="mb-4">
-                    <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                    <div id="slider-range"></div>
-                    <input type="text" name="text" id="amount" />
-                </div>
+        <div class="container">
+            <div class="row mb-5">
+                <aside class="border p-4 rounded mb-4">
+                    <div class="mb-4">
+                        <h3 class="mb-3 h6 text-uppercase text-black d-block shadow">Filter by Price</h3>
+                        <div id="slider-range"></div>
+                        <input type="text" name="text" id="amount" />
+                    </div>
 
 
-                <div id="Size" class="mb-4">
+                    <div id="Size" class="mb-4">
 
-                </div>
-                <div id="Color" class="mb-4">
+                    </div>
+                    <div id="Color" class="mb-4">
 
-                </div>
+                    </div>
 
-            </aside>
+                </aside>
 
-            <div class="row align">
-                <div class="col-md-12 mb-5">
-                    <div class="d-flex">
-                        <div class="btn-group show">
-                            <button class="btn btn-white btn-sm dropdown-toggle px-4" id="dropdownMenuReference" aria-expanded="true" type="button" data-toggle="dropdown">Reference</button>
-                            <div class="dropdown-menu show" aria-labelledby="dropdownMenuReference" x-placement="bottom-start">
-                                <a asp-controller="Productes" asp-action="OrderByPrice" class="dropdown-item">Price, low to high</a>
-                                <a class="dropdown-item" href="#">Price, high to low</a>
+                <div class="row align">
+                    <div class="col-md-12 mb-5">
+                        <div class="d-flex">
+                            <div class="btn-group show">
+                                <button class="btn btn-white btn-sm dropdown-toggle px-4" id="dropdownMenuReference" aria-expanded="true" type="button" data-toggle="dropdown">Reference</button>
+                                <div class="dropdown-menu show" aria-labelledby="dropdownMenuReference" x-placement="bottom-start">
+                                    <a asp-controller="Productes" asp-action="OrderByPrice" class="dropdown-item">Price, low to high</a>
+                                    <a class="dropdown-item" href="#">Price, high to low</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <section id="Product" class="col-md-9"></section>
+                <section id="Product" class="col-md-9"></section>
+            </div>
         </div>
     </div>
-
 </body>
 </html>
 
 @section Scripts{
+    <script src="~/js/loader.js"></script>
     <script src="~/js/HeaderLoad.js"></script>
     <script src="~/js/Home.js"></script>
     <script src="~/js/jquery-ui.js"></script>
@@ -93,4 +101,5 @@
     <script src="~/js/jquery.magnific-popup.min.js"></script>
     <script src="~/js/aos.js"></script>
     <script src="~/js/main.js"></script>
+
 }

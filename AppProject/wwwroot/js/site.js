@@ -6,14 +6,14 @@ $(document).ready(function () {
 
     $(".Department").hover(function () {
         $(this).find('.Component').show()
-        $(this).css('width', 90 + 'px')
+        $(this).css('width', 140 + 'px')
         $(this).css('height', 200 + 'px')
         //$(this).css('background-color','red');
 
 
     }, function () {
         $(this).find('.Component').hide()
-        $(this).css('width', 90 + 'px')
+        $(this).css('width', 140 + 'px')
         $(this).css('height', 37 + 'px')
         //$(this).css('background-color', 'yellow');
     });

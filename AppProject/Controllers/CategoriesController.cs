@@ -25,9 +25,16 @@ namespace AppProject.Controllers
 
             return View(await databaseContext.ToListAsync());       
 
-            //return View(await _context.Categories.ToListAsync());
+        }
+
+        public async Task<IActionResult> List()
+        {
+            var databaseContext = _context.Categories.Include(s => s.SubCategories);
+
+            return View(await databaseContext.ToListAsync());
 
         }
+
 
 
         // GET: Categories/Details/5
@@ -65,7 +72,7 @@ namespace AppProject.Controllers
             {
                 _context.Add(categories);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(categories);
         }
@@ -116,7 +123,7 @@ namespace AppProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(categories);
         }
@@ -144,10 +151,10 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var categories = await _context.Categories.SingleOrDefaultAsync(m => m.Id == id);
+            var categories = await _context.Categories.Include(s => s.SubCategories).SingleOrDefaultAsync(m => m.Id == id);
             _context.Categories.Remove(categories);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         private bool CategoriesExists(int id)

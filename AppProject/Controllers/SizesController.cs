@@ -34,7 +34,7 @@ namespace AppProject.Controllers
             var q = from pro in _context.Productes
                     join connect in _context.ConnectTable on pro.Id equals connect.ProductesId
                     where connect.SizeId == sizeid
-                    select new ColorSizeProductVM()
+                    select new ProductByColorSizeVM()
                     {
                         Id = connect.SizeId,
                         ProductName = pro.ProductName,
