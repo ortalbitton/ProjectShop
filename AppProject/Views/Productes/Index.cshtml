@@ -4,26 +4,43 @@
     ViewData["Title"] = "Index";
 }
 
-@foreach (var Product in Model)
-{
-    <div class="col-md-4">
-        <div class="product-item">
-            <img src="~/imagesweb/@Product.ImgId"/>
-            <div class="product-info">
-                <a asp-controller="Productes" asp-action="Details" asp-route-id="@Product.Id">@Product.ProductName</a>
-                <p name="productname">@Product.Price</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    @foreach (var Product in Model)
+    {<div class="col-md-4">
+            <div class="product-item">
+                <img src="~/imagesweb/@Product.ImgId" />
+                <div class="product-info">
+                    <a asp-controller="Productes" asp-action="Details" asp-route-id="@Product.Id">@Product.ProductName</a>
+                    <p name="productname">@Product.Price</p>
+                </div>
+
+                @*<div>
+                            <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
+                    </div>*@
+
             </div>
-
-            @*<div>
-                <a asp-action="Edit" asp-route-id="@Product.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Product.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Product.Id">Delete</a>
-        </div>*@
-       
         </div>
-    </div>
-}
+    }
 
+ 
+</body>
+</html>
+
+
+@section Scripts{
+    <script>
+    var data = @ViewBag.data;
+    </script>
+   <script src="~/js/ProductsCount.js"></script>
+}
 
 
 @*<h2>Index</h2>

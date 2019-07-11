@@ -23,94 +23,94 @@
     </div>
 
 
-    <div class="page-area product-page spad">
+        <div class="page-area product-page spad">
 
-        <div class="container">
-            <div class="row">
+            <div class="container">
+                <div class="row">
 
-                <div class="col-md-4">
-                    <figure>
-                        <img class="product-big-img" src="~/imagesweb/@Html.DisplayFor(model => model.ImgId)" alt="">
-                    </figure>
+                    <div class="col-md-4">
+                        <figure>
+                            <img class="product-big-img" src="~/imagesweb/@Html.DisplayFor(model => model.ImgId)" alt="">
+                        </figure>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="product-content">
+                            <h2>@Html.DisplayFor(model => model.ProductName)</h2>
+                            <div class="pc-meta">
+                                <h4 class="price">@Html.DisplayFor(model => model.Price)</h4>
+                            </div>
+
+                            @*<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore- mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>*@
+
+                            <div class="input-group">
+                                <span>צבעים</span>
+                                <span class="input-group-prepend">
+                                    <select class="form-control" asp-items="ViewBag.ColorId"></select>
+                                </span>
+                            </div>
+                            <div class="input-group">
+                                <span>מידות</span>
+                                <span class="input-group-prepend">
+                                    <select class="form-control" asp-items="ViewBag.SizeId"></select>
+                                </span>
+                            </div>
+
+                            <div class="mb-5">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn" type="button">−</button>
+                                        @*</div>*@
+
+                                        <input class="form-control text-center" aria-describedby="button-addon1" aria-label="Example text with button addon" type="text" placeholder="" value="@Html.DisplayFor(model => model.AmountOfOrders)">
+
+                                        @*<div class="input-group-append">*@
+                                        <button class="btn" type="button">+</button>
+                                        @*</div>*@
+                                    </div>
+                                </div>
+
+
+                                <a asp-action="Create" asp-controller="ConnectTables" asp-route-id="#id" class="site-btn btn-line">ADD TO MART</a>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-     
-                <div class="col-md-6">
-                    <div class="product-content">
-                        <h2>@Html.DisplayFor(model => model.ProductName)</h2>
-                        <div class="pc-meta">
-                            <h4 class="price">@Html.DisplayFor(model => model.Price)</h4>
-                        </div>
+                <div class="product-details">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <ul class="nav" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Description</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Additional information</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews (0)</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <!-- single tab content -->
+                                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                </div>
+                                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                </div>
+                                <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
 
-                        @*<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore- mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>*@
-
-                        <div class="input-group">
-                            <span>צבעים</span>
-                            <span class="input-group-prepend">
-                                <select class="form-control" asp-items="ViewBag.ColorId"></select>
-                            </span>
-                        </div>
-                        <div class="input-group">
-                            <span>מידות</span>
-                            <span class="input-group-prepend">
-                                <select class="form-control" asp-items="ViewBag.SizeId"></select>
-                            </span>
-                        </div>
-
-                        <div class="mb-5">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn" type="button">−</button>
-                                    @*</div>*@
-
-                                    <input class="form-control text-center" aria-describedby="button-addon1" aria-label="Example text with button addon" type="text" placeholder="" value="@Html.DisplayFor(model => model.AmountOfOrders)">
-
-                                    @*<div class="input-group-append">*@
-                                    <button class="btn" type="button">+</button>
-                                    @*</div>*@
                                 </div>
                             </div>
-
-
-                            <a asp-action="Index" asp-controller="Marts" class="site-btn btn-line">ADD TO MART</a>
-                        </div>
-                    </div>
-
-                </div>
-            
-            </div>
-            <div class="product-details">
-                <div class="row">
-                    <div class="col-lg-10 offset-lg-1">
-                        <ul class="nav" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Description</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Additional information</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews (0)</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <!-- single tab content -->
-                            <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
-                            </div>
-                            <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
-                            </div>
-                            <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
-
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @*<div class="text-center rp-title">
+                @*<div class="text-center rp-title">
                     <h5>Related products</h5>
                 </div>*@
-            @*<div class="row">
+                @*<div class="row">
                     <div class="col-lg-3">
                         <div class="product-item">
                             <figure>
@@ -202,9 +202,10 @@
                         </div>
                     </div>
                 </div>*@
-        </div>
+            </div>
 
-    </div>
+        </div>
+ 
     <!-- Page end -->
     <!-- Footer top section -->
     @*<section class="footer-top-section home-footer">

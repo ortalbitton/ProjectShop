@@ -83,12 +83,10 @@ namespace AppProject.Controllers
             //כשיש התאמה
             if (q.ToList().Count > 0)
             {
-
                 HttpContext.Session.SetString("Mail", customer.Mail.ToString());
-                //HttpContext.Session.SetString("Id", customer.Mart.Id.ToString());
                 return RedirectToAction("Index", "Home");
-
             }
+        
 
             ViewBag.Fail = true;
 

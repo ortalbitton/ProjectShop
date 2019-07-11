@@ -36,7 +36,7 @@
             }
             else
             {
- 
+
                 <div class="row mb-5">
                     <form class="col-md-12" method="post">
                         <div class="site-blocks-table">
@@ -54,33 +54,30 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    
                                         @foreach (var connect in item.Details)
                                         {
-                                      
-                                            <tr>
-                                                <td class="product-thumbnail">
-                                                    <img src="~/imagesweb/@connect.Productes.ImgId" alt="Image" class="img-fluid">
-                                                </td>
-                                                <td class="product-name">
-                                                    <h2 class="h5 text-black">@connect.Productes.ProductName</h2>
-                                                </td>
-                                                <td>@connect.Productes.Price</td>
-                                                <td>
-                                                    <div class="input-group mb-3" style="max-width: 120px;">
-                                                        <div class="input-group-prepend">
-                                                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                                <tr>
+                                                    <td class="product-thumbnail">
+                                                        <img src="~/imagesweb/@connect.Productes.ImgId" alt="Image" class="img-fluid">
+                                                    </td>
+                                                    <td class="product-name">
+                                                        <h2 class="h5 text-black">@connect.Productes.ProductName</h2>
+                                                    </td>
+                                                    <td>@connect.Productes.Price</td>
+                                                    <td>
+                                                        <div class="input-group mb-3" style="max-width: 120px;">
+                                                            <div class="input-group-prepend">
+                                                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                                            </div>
+                                                            <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                                            </div>
                                                         </div>
-                                                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><a asp-action="Delete" asp-controller="ConnectTables" asp-route-id="@connect.Productes.Id" class="btn btn-primary height-auto btn-sm">X</a></td>
-                                            </tr>
-                                               
-                                            }
+                                                    </td>
+                                                    <td><a asp-action="Delete" asp-controller="ConnectTables" asp-route-id="@connect.Productes.Id" class="btn btn-primary height-auto btn-sm">X</a></td>
+                                                </tr>
+                                        }
                                     }
                                 </tbody>
                             </table>

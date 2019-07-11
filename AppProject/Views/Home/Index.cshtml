@@ -22,7 +22,6 @@
             <form id="myform" asp-action="Search" asp-controller="Productes">
                 <input type="text" name="name" id="name" placeholder="Search..">
             </form>
-
             <ul>
                 <li id="Account"><a asp-action="LogIn" asp-controller="Customers">כניסה</a></li>
                 <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
@@ -38,15 +37,21 @@
             </div>
         </nav>
 
+        @if (ViewBag.ConnectManager)
+        {
 
-        <div>
-            <ul>
-                <li><a asp-action="List" asp-controller="Categories">עריכת מחלקת קטגוריות</a></li>
-                <li> <a asp-action="List" asp-controller="SubCategories">עריכת מחלקת תת קטגוריה</a></li>
-                <li> <a asp-action="List" asp-controller="Productes">עריכת מחלקת מוצרים</a></li>
-            </ul>
-        </div>
-    
+            <div>
+                <ul>
+                    <li><a asp-action="List" asp-controller="Categories">עריכת מחלקת קטגוריות</a></li>
+                    <li> <a asp-action="List" asp-controller="SubCategories">עריכת מחלקת תת קטגוריה</a></li>
+                    <li> <a asp-action="List" asp-controller="Productes">עריכת מחלקת מוצרים</a></li>
+                    <li> <a asp-action="List" asp-controller="Sizes">עריכת מחלקת מידות</a></li>
+                    <li> <a asp-action="List" asp-controller="Colors">עריכת מחלקת צבעים</a></li>
+                </ul>
+            </div>
+        }
+
+        <a asp-action="API">המרה של מטבע בין דולר לשקל</a>
         <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
 
 
@@ -87,6 +92,10 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="chart"></div>
+    </footer>
 </body>
 </html>
 
@@ -101,5 +110,4 @@
     <script src="~/js/jquery.magnific-popup.min.js"></script>
     <script src="~/js/aos.js"></script>
     <script src="~/js/main.js"></script>
-
 }

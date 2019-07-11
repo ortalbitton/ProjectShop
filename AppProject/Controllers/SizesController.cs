@@ -27,6 +27,13 @@ namespace AppProject.Controllers
             return PartialView(await databaseContext.Where(s=>s.SizeName=="XS" || s.SizeName=="S" || s.SizeName=="M" || s.SizeName=="L" || s.SizeName=="XL").ToListAsync());
         }
 
+        public async Task<IActionResult> List()
+        {
+            var databaseContext = _context.Sizes.Include(m => m.Details);
+
+            return View(await databaseContext.ToListAsync());
+        }
+
         public async Task<IActionResult> Search(int? sizeid)
         {
 
@@ -80,7 +87,7 @@ namespace AppProject.Controllers
             {
                 _context.Add(sizes);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(sizes);
         }
@@ -131,7 +138,7 @@ namespace AppProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(sizes);
         }
@@ -162,7 +169,7 @@ namespace AppProject.Controllers
             var sizes = await _context.Sizes.SingleOrDefaultAsync(m => m.Id == id);
             _context.Sizes.Remove(sizes);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         private bool SizesExists(int id)

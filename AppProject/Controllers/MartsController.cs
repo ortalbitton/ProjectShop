@@ -28,6 +28,7 @@ namespace AppProject.Controllers
 
             ViewBag.Mail = HttpContext.Session.GetString("Mail");
 
+
             if (ViewBag.Mail==null)
                 ViewBag.ConnectClient = false;
             else

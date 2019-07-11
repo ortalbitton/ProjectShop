@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "API";
+}
+<h2>@ViewData["Title"].</h2>
+<a asp-action="Index" asp-controller="Home">Back to Shop</a>
+
+<button id="submitButton">המר לשקל</button>
+<label>הכנס מחיר בדולר</label>
+<input type="text" id="from" />
+<table id="weatherTable"></table>
+
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        function CreateWeatherJson(json) {
+
+
+        }
+
+        $("#submitButton").click(function (e) {
+            from = $("#from").val();
+            to = 'ILS';
+            $.ajax({
+                type: "POST",
+                url: 'http://www.apilayer.net/api/live?access_key=50519dda85ef9ee955309580d07281c4' + '&currencies=' + from + ',' + to,
+                dataType: "json",
+                success: function (result) {
+                    var newJson = "";
+                    timestamp = result.timestamp;
+                    source = result.source;
+                    USDEUR = result.quotes.USDEUR
+                    USDILS = result.quotes.USDILS
+
+                    $('#weatherTable').append('<tr><td><label>' + "מחיר בשקל:" + '</label></td><td>' + USDILS * from + '</td></tr>');
+
+                }
+            });
+        });
+    </script>
+}

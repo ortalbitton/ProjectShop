@@ -11,6 +11,14 @@ namespace AppProject.Controllers
     {
         public IActionResult Index()
         {
+
+            ViewBag.Mail = HttpContext.Session.GetString("Mail");
+
+            if (ViewBag.Mail == "Manager@gmail.com")
+                ViewBag.ConnectManager = true;
+            else
+                ViewBag.ConnectManager = false;
+
             return View();
         }
 
@@ -20,6 +28,13 @@ namespace AppProject.Controllers
 
             return View();
         }
+
+        public IActionResult API()
+        {
+
+            return View();
+        }
+
 
         public IActionResult Contact()
         {

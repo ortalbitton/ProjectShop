@@ -21,6 +21,15 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 
+.chart div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+}
+
 /* Center the loader */
 #loader {
     position: absolute;
@@ -240,6 +249,7 @@ template {
 }
 a {
     background-color: transparent;
+    margin-left:5px;
 
 }
     a:active,

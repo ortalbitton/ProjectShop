@@ -27,6 +27,13 @@ namespace AppProject.Controllers
             return View(await appProjectContext.ToListAsync());
         }
 
+        public async Task<IActionResult> List()
+        {
+            var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).Include(c => c.Productes).Include(c => c.Size);
+
+            return View(await appProjectContext.ToListAsync());
+        }
+
 
         // GET: ConnectTables/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,10 +57,12 @@ namespace AppProject.Controllers
             return View(connectTable);
         }
 
+      
         // GET: ConnectTables/Create
         public IActionResult Create()
         {
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id");
+
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName");
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id");
             ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName");
             ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName");
@@ -71,16 +80,14 @@ namespace AppProject.Controllers
             {
                 _context.Add(connectTable);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Marts");
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName", connectTable.ColorId);
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName", connectTable.ProductesId);
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName", connectTable.SizeId);
             return View(connectTable);
         }
-
- 
 
 
         // GET: ConnectTables/Edit/5
@@ -96,10 +103,10 @@ namespace AppProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
+            //ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName", connectTable.ColorId);
             ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName", connectTable.ProductesId);
+            //ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName", connectTable.SizeId);
             return View(connectTable);
         }
 
@@ -110,6 +117,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductesId,SizeId,ColorId,MartId")] ConnectTable connectTable)
         {
+      
             if (id != connectTable.ProductesId)
             {
                 return NotFound();
@@ -133,12 +141,14 @@ namespace AppProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
-            ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id", connectTable.SizeId);
+
+
+            //ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName", connectTable.Color.ColorName);
+            //ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
+            //ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName", connectTable.ProductesId);
+            //ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName", connectTable.Size.SizeName);
             return View(connectTable);
         }
 

@@ -126,6 +126,9 @@
     <Content Update="Views\Customers\LogIn.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Home\API.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Productes\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

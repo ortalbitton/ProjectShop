@@ -28,6 +28,14 @@ namespace AppProject.Controllers
             return PartialView(await databaseContext.ToListAsync());
         }
 
+        public async Task<IActionResult> List()
+        {
+            var databaseContext = _context.Colors.Include(m => m.Details).ThenInclude(ps => ps.Productes);
+
+
+            return View(await databaseContext.ToListAsync());
+        }
+
         public async Task<IActionResult> Search(int? colorid)
         {
 
@@ -82,7 +90,7 @@ namespace AppProject.Controllers
             {
                 _context.Add(colors);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(colors);
         }
@@ -133,7 +141,7 @@ namespace AppProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(colors);
         }
@@ -164,7 +172,7 @@ namespace AppProject.Controllers
             var colors = await _context.Colors.SingleOrDefaultAsync(m => m.Id == id);
             _context.Colors.Remove(colors);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         private bool ColorsExists(int id)

@@ -23,11 +23,21 @@ namespace AppProject.Controllers
         // GET: Productes
         public async Task<IActionResult> Index(int id)
         {
+            var databaseContext = _context.Productes.Include(p => p.SubCategory);
+
 
             if (id != 0)
-                return PartialView(await _context.Productes.Where(s => s.SubCategory.Id == id).ToListAsync());
+                return PartialView(await databaseContext.Where(s => s.SubCategory.Id == id).ToListAsync());
 
-            return PartialView(await _context.Productes.ToListAsync());
+            //בשביל הגרף
+            var q = from u in databaseContext
+                    //where u.SubCategory.Id==id
+                    select u.SubCategory.Id;
+
+            ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
+
+           return View(await databaseContext.ToListAsync());
+
 
         }
 
@@ -61,9 +71,6 @@ namespace AppProject.Controllers
                           group p by (p.Price / 50) into groups
                           select new { Id = groups.Key, Text = groups.ToList() };
 
-
-
-
             ViewData["product"] = new SelectList(results);
 
             return PartialView(await _context.Productes.ToListAsync());
@@ -86,19 +93,19 @@ namespace AppProject.Controllers
             }
 
             var Colors = from color in _context.Colors
-                         join connect in product.Details
-                         on color.Id equals connect.ColorId
+                         //join connect in product.Details
+                         //on color.Id equals connect.ColorId                        
                          select color.ColorName;
 
 
             var sizes = from size in _context.Sizes
-                       join connect in product.Details
-                       on size.Id equals connect.SizeId
+                       //join connect in product.Details
+                       //on size.Id equals connect.SizeId
                        select size.SizeName;
 
 
-            ViewData["ColorId"] = new SelectList(Colors.Distinct());
-            ViewData["SizeId"] = new SelectList(sizes.Distinct());
+            ViewData["ColorId"] = new SelectList(Colors);
+            ViewData["SizeId"] = new SelectList(sizes);
 
             return View(product);
         }
