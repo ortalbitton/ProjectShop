@@ -51,9 +51,6 @@
             </div>
         }
 
-        <a asp-action="API">המרה של מטבע בין דולר לשקל</a>
-        <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
-
 
         <div class="container">
             <div class="row mb-5">
@@ -79,9 +76,8 @@
                         <div class="d-flex">
                             <div class="btn-group show">
                                 <button class="btn btn-white btn-sm dropdown-toggle px-4" id="dropdownMenuReference" aria-expanded="true" type="button" data-toggle="dropdown">Reference</button>
-                                <div class="dropdown-menu show" aria-labelledby="dropdownMenuReference" x-placement="bottom-start">
-                                    <a asp-controller="Productes" asp-action="OrderByPrice" class="dropdown-item">Price, low to high</a>
-                                    <a class="dropdown-item" href="#">Price, high to low</a>
+                                <div class="dropdown-menu hide" aria-labelledby="dropdownMenuReference" x-placement="bottom-start">
+                                    <a class="dropdown-item">Price, low to high</a>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +91,10 @@
 
     <footer>
         <div class="chart"></div>
+        <div class="newspaper">
+            <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
+            <div class="column"><a asp-action="API">המרה של מטבע בין דולר לשקל</a></div>
+        </div>      
     </footer>
 </body>
 </html>

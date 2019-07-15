@@ -132,7 +132,7 @@
     <Content Update="Views\Productes\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Productes\OrderByPrice.cshtml">
+    <Content Update="Views\Productes\GroupByPrice.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Sizes\List.cshtml">

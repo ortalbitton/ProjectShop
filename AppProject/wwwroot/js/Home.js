@@ -25,4 +25,14 @@ $(document).ready(function () {
         }
     });
 
+    $(".dropdown-item").click(function () {
+        $.ajax({
+            url: "Productes/GroupByPrice",
+            method: "post",
+            success: function (data) {
+                $("#Product").html(data)
+            }
+        });
+    });
+
 });

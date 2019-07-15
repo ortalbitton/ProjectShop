@@ -28,11 +28,11 @@ namespace AppProject.Controllers
 
             ViewBag.Mail = HttpContext.Session.GetString("Mail");
 
-
-            if (ViewBag.Mail==null)
+            if (ViewBag.Mail == null)
                 ViewBag.ConnectClient = false;
-            else
+            else         
                 ViewBag.ConnectClient = true;
+      
 
             ViewBag.total = _context.ConnectTable.Sum(item => item.Productes.Price * item.Productes.AmountOfOrders);
 

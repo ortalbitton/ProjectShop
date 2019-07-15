@@ -54,8 +54,11 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        @foreach (var connect in item.Details)
-                                        {
+                                        @if (item.Customer.Mail == ViewBag.Mail)
+                                        {                                     
+                                            <tr>עגלה של לקוח:@item.Customer.FirstName</tr>
+                                            @foreach (var connect in item.Details)
+                                            {
                                                 <tr>
                                                     <td class="product-thumbnail">
                                                         <img src="~/imagesweb/@connect.Productes.ImgId" alt="Image" class="img-fluid">
@@ -77,6 +80,7 @@
                                                     </td>
                                                     <td><a asp-action="Delete" asp-controller="ConnectTables" asp-route-id="@connect.Productes.Id" class="btn btn-primary height-auto btn-sm">X</a></td>
                                                 </tr>
+                                            }
                                         }
                                     }
                                 </tbody>

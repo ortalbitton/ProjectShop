@@ -21,12 +21,24 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 
+.newspaper {
+    /* Old Chrome, Safari and Opera */
+    -webkit-column-count: 3;
+    -webkit-column-gap: 40px;
+    /* Old Firefox */
+    -moz-column-count: 3;
+    -moz-column-gap: 40px;
+    /* Standard syntax */
+    column-count: 2;
+    column-gap: 40px;
+}
+
 .chart div {
     font: 10px sans-serif;
     background-color: steelblue;
     text-align: right;
-    padding: 3px;
-    margin: 1px;
+    padding: 5px;
+    margin: 5px;
     color: white;
 }
 
@@ -79,14 +91,10 @@ html {
   to{ bottom:0; opacity:1 }
 }
 
-#myDiv {
+/*#myDiv {
   display: none;
   text-align: center;
-}
-
-
-
-
+}*/
 
 
 .MainNavigation .ComponentItem {
@@ -3941,6 +3949,7 @@ tbody.collapse.in {
 .btn-group > .btn:first-child {
   margin-left: 0;
   position:absolute;
+  z-index:0;
 }
 .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
   border-top-right-radius: 0;

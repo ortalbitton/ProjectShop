@@ -34,7 +34,7 @@ namespace AppProject.Controllers
                     //where u.SubCategory.Id==id
                     select u.SubCategory.Id;
 
-            ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
+            ViewBag.data = "[" + string.Join(",", q.Distinct().ToList()) + "]";
 
            return View(await databaseContext.ToListAsync());
 
@@ -65,15 +65,26 @@ namespace AppProject.Controllers
 
         }
 
-        public async Task<IActionResult> OrderByPrice()
+        public async Task<IActionResult> GroupByPrice()
         {
-            var results = from p in _context.Productes
-                          group p by (p.Price / 50) into groups
-                          select new { Id = groups.Key, Text = groups.ToList() };
+          //group by
+            var model = await _context.Productes
+                .GroupBy(o => new
+                {
+                    ImgId=o.ImgId,
+                    ProductName=o.ProductName,
+                    Price = o.Price
+                })
+                .Select(g => new Productes
+                {
+                    ImgId=g.Key.ImgId,
+                    ProductName=g.Key.ProductName,
+                    Price = g.Key.Price
+                })
 
-            ViewData["product"] = new SelectList(results);
+                .ToListAsync();
 
-            return PartialView(await _context.Productes.ToListAsync());
+            return View(model);
 
         }
 
@@ -93,16 +104,22 @@ namespace AppProject.Controllers
             }
 
             var Colors = from color in _context.Colors
-                         //join connect in product.Details
-                         //on color.Id equals connect.ColorId                        
                          select color.ColorName;
 
 
             var sizes = from size in _context.Sizes
-                       //join connect in product.Details
-                       //on size.Id equals connect.SizeId
-                       select size.SizeName;
+                        select size.SizeName;
 
+            var Amount = from a in _context.Productes
+                         where a.Id==id && a.AmountInStock!=0
+                         select a.AmountInStock;
+
+            //כאשר  מוצר נמצא במלאי
+            if (Amount.ToList().Count>0)            
+                ViewBag.AmountInStock = true;
+              else
+                ViewBag.AmountInStock = false;
+            
 
             ViewData["ColorId"] = new SelectList(Colors);
             ViewData["SizeId"] = new SelectList(sizes);

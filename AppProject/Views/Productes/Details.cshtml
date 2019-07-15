@@ -60,18 +60,20 @@
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <button class="btn" type="button">−</button>
-                                        @*</div>*@
-
                                         <input class="form-control text-center" aria-describedby="button-addon1" aria-label="Example text with button addon" type="text" placeholder="" value="@Html.DisplayFor(model => model.AmountOfOrders)">
-
-                                        @*<div class="input-group-append">*@
                                         <button class="btn" type="button">+</button>
-                                        @*</div>*@
                                     </div>
                                 </div>
 
-
-                                <a asp-action="Create" asp-controller="ConnectTables" asp-route-id="#id" class="site-btn btn-line">ADD TO MART</a>
+                                @if (ViewBag.AmountInStock)
+                                {
+                                    <a asp-action="Create" asp-controller="ConnectTables" asp-route-id="#id" class="site-btn btn-line">ADD TO MART</a>
+                                    @*@Html.DisplayFor(model => model.AmountOfOrders)--*@                               
+                                }
+                                else
+                                {
+                                    <div>חסר במלאי</div>
+                                }
                             </div>
                         </div>
 

@@ -18,7 +18,7 @@ namespace AppProject.Controllers
                 ViewBag.ConnectManager = true;
             else
                 ViewBag.ConnectManager = false;
-
+          
             return View();
         }
 
