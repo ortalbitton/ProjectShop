@@ -3,9 +3,9 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/jquery-ui.css">
@@ -87,15 +87,17 @@
                 <section id="Product" class="col-md-9"></section>
             </div>
         </div>
-    </div>
 
-    <footer>
-        <div class="chart"></div>
-        <div class="newspaper">
-            <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
-            <div class="column"><a asp-action="API">המרה של מטבע בין דולר לשקל</a></div>
-        </div>      
-    </footer>
+        <footer>
+            <div class="newspaper">
+                <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
+                <div class="column"><a asp-action="API">המרה של מטבע בין דולר לשקל</a></div>
+                <div class="column"><a asp-action="Graph">גרף</a></div>
+                <div class="column"><a asp-action="Graph1">1גרף</a></div>
+            </div>
+        </footer>
+
+    </div>
 </body>
 </html>
 

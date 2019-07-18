@@ -29,16 +29,7 @@ namespace AppProject.Controllers
             if (id != 0)
                 return PartialView(await databaseContext.Where(s => s.SubCategory.Id == id).ToListAsync());
 
-            //בשביל הגרף
-            var q = from u in databaseContext
-                    //where u.SubCategory.Id==id
-                    select u.SubCategory.Id;
-
-            ViewBag.data = "[" + string.Join(",", q.Distinct().ToList()) + "]";
-
-           return View(await databaseContext.ToListAsync());
-
-
+            return View(await databaseContext.ToListAsync());
         }
 
         public async Task<IActionResult> List()
@@ -47,7 +38,6 @@ namespace AppProject.Controllers
             return View(await _context.Productes.Include(p=>p.SubCategory).ToListAsync());
 
         }
-
 
         //חיפוש לפי שם מוצר
         public async Task<IActionResult> Search(string name)
@@ -103,31 +93,11 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var Colors = from color in _context.Colors
-                         select color.ColorName;
-
-
-            var sizes = from size in _context.Sizes
-                        select size.SizeName;
-
-            var Amount = from a in _context.Productes
-                         where a.Id==id && a.AmountInStock!=0
-                         select a.AmountInStock;
-
-            //כאשר  מוצר נמצא במלאי
-            if (Amount.ToList().Count>0)            
-                ViewBag.AmountInStock = true;
-              else
-                ViewBag.AmountInStock = false;
-            
-
-            ViewData["ColorId"] = new SelectList(Colors);
-            ViewData["SizeId"] = new SelectList(sizes);
-
+          
             return View(product);
         }
 
-
+      
         // GET: Productes/Create
         public async Task<IActionResult> Create()
         {
@@ -143,9 +113,7 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProductName,Price,AmountInStock,AmountOfOrders,DeliveryPrice,ImgId,SubCategoryId")] Productes productes)
         {
-
-  
-          if (ModelState.IsValid)
+            if (ModelState.IsValid)
             { 
               _context.Add(productes);
                 await _context.SaveChangesAsync();
@@ -155,6 +123,7 @@ namespace AppProject.Controllers
             ViewData["SubId"] = new SelectList(await _context.SubCategory.ToListAsync(), "Id", "SubName", productes.SubCategory.SubName);
             return View(productes);
         }
+
 
         [HttpPost]
         public IActionResult TestFunction(Productes productes)

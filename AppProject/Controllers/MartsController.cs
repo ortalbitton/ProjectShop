@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AppProject.Controllers
 {
@@ -16,8 +17,8 @@ namespace AppProject.Controllers
 
         public MartsController(AppProjectContext context)
         {
-            _context = context;   
-          
+            _context = context;
+
         }
 
         // GET: Marts
@@ -30,16 +31,14 @@ namespace AppProject.Controllers
 
             if (ViewBag.Mail == null)
                 ViewBag.ConnectClient = false;
-            else         
+            else
                 ViewBag.ConnectClient = true;
-      
 
             ViewBag.total = _context.ConnectTable.Sum(item => item.Productes.Price * item.Productes.AmountOfOrders);
 
             return View(await appProjectContext.ToListAsync());
 
         }
-
 
         // GET: Marts/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -59,6 +58,7 @@ namespace AppProject.Controllers
 
             return View(mart);
         }
+
 
         // GET: Marts/Create
         public IActionResult Create()

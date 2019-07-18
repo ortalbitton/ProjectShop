@@ -5,9 +5,9 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -55,10 +55,11 @@
                                     @foreach (var item in Model)
                                     {
                                         @if (item.Customer.Mail == ViewBag.Mail)
-                                        {                                     
+                                        {
                                             <tr>עגלה של לקוח:@item.Customer.FirstName</tr>
                                             @foreach (var connect in item.Details)
                                             {
+
                                                 <tr>
                                                     <td class="product-thumbnail">
                                                         <img src="~/imagesweb/@connect.Productes.ImgId" alt="Image" class="img-fluid">
@@ -68,19 +69,14 @@
                                                     </td>
                                                     <td>@connect.Productes.Price</td>
                                                     <td>
-                                                        <div class="input-group mb-3" style="max-width: 120px;">
-                                                            <div class="input-group-prepend">
-                                                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                                                            </div>
-                                                            <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                                                            </div>
+                                                        <div class="input-group mb-3" style="max-width: 120px;">                           
+                                                            <input min="1" max="9" type="text" class="form-control text-center" value="@connect.Productes.AmountOfOrders" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">                             
                                                         </div>
                                                     </td>
                                                     <td><a asp-action="Delete" asp-controller="ConnectTables" asp-route-id="@connect.Productes.Id" class="btn btn-primary height-auto btn-sm">X</a></td>
                                                 </tr>
                                             }
+
                                         }
                                     }
                                 </tbody>
@@ -140,11 +136,11 @@
                     </div>
 
                 </div>
-         
+
             }
         </div>
     </div>
-            
+
 </body>
 </html>
 

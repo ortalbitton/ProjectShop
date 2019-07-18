@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using AppProject.ViewModel;
+using Microsoft.AspNetCore.Http;
 
 namespace AppProject.Controllers
 {
@@ -57,7 +58,51 @@ namespace AppProject.Controllers
             return View(connectTable);
         }
 
-      
+
+        public IActionResult Add(int? id)
+        {
+
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName");
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName");
+            ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id");
+
+            var Amount = from a in _context.Productes
+                         where a.Id==id && a.AmountInStock!=0
+                         select a.AmountInStock;
+
+            //כאשר  מוצר נמצא במלאי
+            if (Amount.ToList().Count>0)            
+                ViewBag.AmountInStock = true;
+              else
+                ViewBag.AmountInStock = false;
+
+            ViewBag.ProductId = _context.Productes.Where(p => p.Id == id);
+
+            return View();
+        }
+
+        // POST: ConnectTables/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add([Bind("ProductesId,SizeId,ColorId,MartId")] ConnectTable connectTable)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(connectTable);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Marts");
+            }
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName", connectTable.ColorId);
+            ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName", connectTable.ProductesId);
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName", connectTable.SizeId);
+            return RedirectToAction("Index,Marts");
+        }
+
+
+
         // GET: ConnectTables/Create
         public IActionResult Create()
         {
@@ -88,7 +133,7 @@ namespace AppProject.Controllers
             ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName", connectTable.SizeId);
             return View(connectTable);
         }
-
+        
 
         // GET: ConnectTables/Edit/5
         public async Task<IActionResult> Edit(int? id)

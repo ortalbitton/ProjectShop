@@ -1,0 +1,22 @@
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Graph1";
+}
+
+<a asp-action="Index" asp-controller="Home">Back to Shop</a>
+<br />
+<div class="chart"></div>
+
+@section Scripts
+    {
+
+    <script>
+    var data = @ViewBag.data;
+    </script>
+
+    <script src="~/js/ProductsCount1.js"></script>
+}
+

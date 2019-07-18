@@ -1,0 +1,103 @@
+﻿@model AppProject.Models.ConnectTable
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/aos.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+    <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @foreach (var PId in ViewBag.ProductId)
+            {
+
+                <input hidden="hidden" type="text" asp-for="ProductesId" class="form-control" value="@PId.Id" />
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <figure>
+                                <img class="product-big-img" src="~/imagesweb/@PId.ImgId" alt="">
+                            </figure>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="product-content">
+                                <h2>@PId.ProductName</h2>
+                                <div class="pc-meta">
+                                    <h4 class="price">@PId.Price</h4>
+                                </div>
+
+                                <div class="input-group">
+                                    <span>צבעים</span>
+                                    <span class="input-group-prepend">
+                                        <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorId"></select>
+                                    </span>
+                                </div>
+
+                                <div class="input-group">
+                                    <span>מידות</span>
+                                    <span class="input-group-prepend">
+                                        <select asp-for="SizeId" class="form-control" asp-items="ViewBag.SizeId"></select>
+                                    </span>
+                                </div>
+
+                                <div class="mb-5">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <input min="1" max="9" class="form-control text-center" aria-describedby="button-addon1" aria-label="Example text with button addon" type="number" placeholder="" value="@PId.AmountOfOrders">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label asp-for="MartId" class="col-md-2 control-label"></label>
+                                    <span class="input-group-prepend">
+                                        <select asp-for="MartId" class="form-control" asp-items="ViewBag.MartId"></select>
+                                    </span>
+                                </div>
+
+
+                                @if (ViewBag.AmountInStock)
+                                {
+                                    foreach (var ProductId in ViewBag.ProductId)
+                                    {
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Add" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div>חסר במלאי</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+    </form>
+
+    <div>
+        <a asp-action="List" asp-controller="ConnectTables">Back to List</a>
+    </div>
+</body>
+</html>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

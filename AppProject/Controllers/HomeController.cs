@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppProject.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AppProjectContext _context;
+
+        public HomeController(AppProjectContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
 
@@ -18,7 +27,7 @@ namespace AppProject.Controllers
                 ViewBag.ConnectManager = true;
             else
                 ViewBag.ConnectManager = false;
-          
+
             return View();
         }
 
@@ -31,8 +40,32 @@ namespace AppProject.Controllers
 
         public IActionResult API()
         {
+   
+            return View();
+        }
+
+        public IActionResult Graph()
+        {
+            //בשביל הגרף
+            var q = from u in _context.Productes.Include(p => p.SubCategory)
+                    select u.SubCategory.Id;
+
+            ViewBag.data = "[" + string.Join(",", q.Distinct().ToList()) + "]";
+
 
             return View();
+        }
+
+        public IActionResult Graph1()
+        {
+            var q = from u in _context.Productes.Include(p => p.SubCategory).ThenInclude(c => c.Categories)
+                    select u.SubCategory.Categories.Id;
+
+            ViewBag.data = "[" + string.Join(",", q.Distinct().ToList()) + "]";
+
+
+            return View();
+
         }
 
 

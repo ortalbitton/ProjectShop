@@ -19,5 +19,6 @@ namespace AppProject.Models
 
         public int MartId { get; set; }
         public Mart Mart { get; set; }
+      
     }
 }
