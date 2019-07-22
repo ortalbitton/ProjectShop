@@ -27,15 +27,6 @@ namespace AppProject.Controllers
 
             var appProjectContext = _context.Mart.Include(m => m.Customer).Include(p => p.Details).ThenInclude(ps => ps.Productes);
 
-            ViewBag.Mail = HttpContext.Session.GetString("Mail");
-
-            if (ViewBag.Mail == null)
-                ViewBag.ConnectClient = false;
-            else
-                ViewBag.ConnectClient = true;
-
-            ViewBag.total = _context.ConnectTable.Sum(item => item.Productes.Price * item.Productes.AmountOfOrders);
-
             return View(await appProjectContext.ToListAsync());
 
         }
@@ -167,6 +158,7 @@ namespace AppProject.Controllers
             return RedirectToAction("Index");
         }
 
+       
         private bool MartExists(int id)
         {
             return _context.Mart.Any(e => e.Id == id);

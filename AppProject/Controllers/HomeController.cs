@@ -27,6 +27,18 @@ namespace AppProject.Controllers
                 ViewBag.ConnectManager = true;
             else
                 ViewBag.ConnectManager = false;
+            
+
+            if (ViewBag.Mail == null)
+                ViewBag.ConnectClient = false;
+            else
+            {
+                ViewBag.ConnectClient = true;
+
+                ViewBag.CustomerId = (from u in _context.Customer
+                                  where u.Mail == HttpContext.Session.GetString("Mail")
+                                  select u.FirstName);
+            }
 
             return View();
         }

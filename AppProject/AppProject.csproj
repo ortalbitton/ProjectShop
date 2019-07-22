@@ -120,6 +120,9 @@
     <Content Update="Views\ConnectTables\Add.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\ConnectTables\Shop.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\ConnectTables\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

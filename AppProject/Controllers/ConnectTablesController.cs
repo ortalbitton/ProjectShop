@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using AppProject.ViewModel;
 using Microsoft.AspNetCore.Http;
+using Microsoft.VisualStudio.Web.CodeGeneration.Utils.Messaging;
 
 namespace AppProject.Controllers
 {
@@ -23,7 +24,14 @@ namespace AppProject.Controllers
         // GET: ConnectTables
         public async Task<IActionResult> Index()
         {
-            var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).Include(c => c.Productes).Include(c => c.Size);
+            var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Mart).ThenInclude(x=>x.Customer).Include(c => c.Productes).Include(c => c.Size);
+
+            ViewBag.Mail = HttpContext.Session.GetString("Mail");
+
+            if (ViewBag.Mail == null)
+                ViewBag.ConnectClient = false;
+            else
+                ViewBag.ConnectClient = true;
 
             return View(await appProjectContext.ToListAsync());
         }
@@ -78,6 +86,10 @@ namespace AppProject.Controllers
 
             ViewBag.ProductId = _context.Productes.Where(p => p.Id == id);
 
+            ViewBag.MartId = (from u in _context.Customer
+                                  where u.Mail == HttpContext.Session.GetString("Mail")
+                                  select u.Id);
+
             return View();
         }
 
@@ -88,19 +100,25 @@ namespace AppProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add([Bind("ProductesId,SizeId,ColorId,MartId")] ConnectTable connectTable)
         {
-            if (ModelState.IsValid)
+            if(!ConnectTableExist(connectTable.ProductesId, connectTable.SizeId, connectTable.ColorId)  && connectTable.MartId!=0)
             {
                 _context.Add(connectTable);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Marts");
+                return RedirectToAction("Index", "ConnectTables");        
             }
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName", connectTable.ColorId);
-            ViewData["MartId"] = new SelectList(_context.Mart, "Id", "Id", connectTable.MartId);
-            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName", connectTable.ProductesId);
-            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName", connectTable.SizeId);
-            return RedirectToAction("Index,Marts");
-        }
 
+
+            if (ConnectTableExist(connectTable.ProductesId,connectTable.SizeId,connectTable.ColorId) && connectTable.MartId != 0)
+            {
+
+                //צריך טיפול                
+               //connectTable.Productes.AmountOfOrders++;
+            }
+
+
+            return RedirectToAction("LogIn", "Customers");
+
+        }
 
 
         // GET: ConnectTables/Create
@@ -222,17 +240,23 @@ namespace AppProject.Controllers
         // POST: ConnectTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int ColorId,int SizeId)
         {
-            var connectTable = await _context.ConnectTable.FirstOrDefaultAsync(m => m.ProductesId == id);
+            var connectTable = await _context.ConnectTable.FirstOrDefaultAsync(m => m.ColorId==ColorId && m.SizeId==SizeId);
             _context.ConnectTable.Remove(connectTable);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index","Marts");
+            return RedirectToAction("Index","ConnectTables");
         }
+
 
         private bool ConnectTableExists(int id)
         {
             return _context.ConnectTable.Any(e => e.ProductesId == id);
+        }
+
+        private bool ConnectTableExist(int id,int sizeid,int colorid)
+        {
+            return _context.ConnectTable.Any(e => e.ProductesId == id && e.SizeId==sizeid && e.ColorId==colorid);
         }
     }
 }

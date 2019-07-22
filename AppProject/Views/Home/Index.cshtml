@@ -18,14 +18,29 @@
 
     <div style="display:none;" id="myDiv" class="animate-bottom">
         <header>
+
+            @if (ViewBag.ConnectClient)
+            {
+                @foreach (var CustomerId in ViewBag.CustomerId)
+                {
+                    <h4 style="float:right;">היי @CustomerId</h4>
+                }
+            }
+
             <img class="logo" src="~/imagesweb/logo.jpg" />
+
             <form id="myform" asp-action="Search" asp-controller="Productes">
                 <input type="text" name="name" id="name" placeholder="Search..">
             </form>
             <ul>
                 <li id="Account"><a asp-action="LogIn" asp-controller="Customers">כניסה</a></li>
                 <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
-                <li id="ShoppingCart"><a asp-action="Index" asp-controller="Marts">עגלה שלי</a></li>
+                <li id="ShoppingCart"><a asp-action="Index" asp-controller="ConnectTables">עגלה שלי</a></li>
+                @*@foreach (var MartId in ViewBag.MartId)
+            {
+                <li id="ShoppingCart"><a asp-route-id="@MartId" asp-action="Edit" asp-controller="ConnectTables">עגלה שלי</a></li>
+            }*@
+                
             </ul>
 
 

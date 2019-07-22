@@ -62,23 +62,27 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <label asp-for="MartId" class="col-md-2 control-label"></label>
-                                    <span class="input-group-prepend">
-                                        <select asp-for="MartId" class="form-control" asp-items="ViewBag.MartId"></select>
-                                    </span>
+                                    @foreach (var MartId in ViewBag.MartId)
+                                    {
+                                        <input hidden="hidden" type="text" asp-for="MartId" class="form-control" value="@MartId" />
+                                    
+                                    }
+                                    @*<label asp-for="MartId" class="col-md-2 control-label"></label>
+        <span class="input-group-prepend">
+            <select asp-for="MartId" class="form-control" asp-items="ViewBag.MartId"></select>
+        </span>*@
                                 </div>
 
 
                                 @if (ViewBag.AmountInStock)
                                 {
-                                    foreach (var ProductId in ViewBag.ProductId)
-                                    {
+                                   
                                         <div class="form-group">
                                             <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Add" class="btn btn-default" />
+                                                <input type="submit" value="Add To Mart" class="btn btn-default" />
                                             </div>
                                         </div>
-                                    }
+                                   
                                 }
                                 else
                                 {
