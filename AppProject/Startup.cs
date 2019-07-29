@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using Microsoft.AspNetCore.Session;
+using System.Data.SqlClient;
 
 namespace AppProject
 {
@@ -60,13 +61,18 @@ namespace AppProject
 
             app.UseSession();
 
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
             });
 
+
+
+            
 
         }
     }

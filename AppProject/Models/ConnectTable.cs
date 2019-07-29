@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +21,11 @@ namespace AppProject.Models
 
         public int MartId { get; set; }
         public Mart Mart { get; set; }
-      
+
+        public int AmountOfOrders { get; set; }
+
+        public int AmountInStock { get; set; }
+
+
     }
 }

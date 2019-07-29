@@ -39,67 +39,78 @@
 
                 <div class="row mb-5">
                     <div class="site-blocks-table">
-                       <form method="post" asp-action="Delete">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="product-thumbnail">Image</th>
-                                    <th class="product-name">Product</th>
-                                    <th class="product-price">Price</th>
-                                    <th class="product-price">Color</th>
-                                    <th class="product-price">Size</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-remove">Remove</th>
-                                </tr>
-                            </thead>
+                        <form method="post" asp-action="Delete">
+                     
+                            <table class="table table-bordered">
 
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    @if (item.Mart.Customer.Mail == ViewBag.Mail)
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Image</th>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-price">Color</th>
+                                        <th class="product-price">Size</th>
+                                        <th class="product-quantity">AmountOfOrders</th>
+                                        @*<th class="product-quantity">AmountInStock</th>*@
+                                        <th class="product-remove">Remove</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                @*<input type="text" name="N_Product" id="N_Product" value="@item.Productes.Id" />*@
-                                                <img src="~/imagesweb/@item.Productes.ImgId" alt="Image" class="img-fluid">
-                                            </td>
-                                            <td class="product-name">
-                                                <h2 class="h5 text-black">@item.Productes.ProductName</h2>
-                                            </td>
-                                            <td>@item.Productes.Price</td>
+                                        if (item.AmountOfOrders != 0)
+                                        {
+
+                                            <tr>
+                                                <td class="product-thumbnail">
+                                                    <img src="~/imagesweb/@item.Productes.ImgId" alt="Image" class="img-fluid">
+                                                </td>
+                                                <td class="product-name">
+                                                    <h2 class="h5 text-black">@item.Productes.ProductName</h2>
+                                                </td>
+                                                <td>@item.Productes.Price</td>
 
 
 
-                                            <td>
-                                                @item.Color.ColorName
-                                                <input type="text" name="N_Color" id="N_Color" value="@item.Color.Id" />
+                                                <td>
+                                                    @item.Color.ColorName
+                                                    @*<input type="text" name="N_Color" id="N_Color" value="@item.Color.Id" />*@
 
-                                            </td>
-                                            <td>
-                                                @item.Size.SizeName
-                                                <input type="text" name="N_Size" id="N_Size" value="@item.Size.Id" />
+                                                </td>
+                                                <td>
+                                                    @item.Size.SizeName
+                                                    @*<input type="text" name="N_Size" id="N_Size" value="@item.Size.Id" />*@
 
-                                            </td>
-                                            <td>
-                                                <div class="input-group mb-3" style="max-width: 120px;">
-                                                    <input min="1" max="9" type="text" class="form-control text-center" value="@item.Productes.AmountOfOrders" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                                </div>
-                                            </td>
-                                            @*<td><a asp-action="Delete" asp-controller="ConnectTables" asp-route-id="@connect.Productes.Id" class="btn btn-primary height-auto btn-sm">X</a></td>*@
-                                            <td>
-                                                <div class="form-actions no-color">
-                                                    <input type="submit" value="X" class="btn btn-primary height-auto btn-sm" />
-                                                    @*asp-route-ColorId="@item.Color.Id" asp-route-SizeId="@item.Size.Id"*@
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                @if (item.AmountInStock > 0)
+                                                {
+                                                    <td>
+                                                        @item.AmountOfOrders
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>חסר במלאי</td>
+                                                }
+                                                <td>
+                                                    <div class="form-actions no-color">
+                                                        <input type="submit" value="X" class="btn btn-primary height-auto btn-sm" />
+                                                        @*asp-route-ColorId="@item.Color.Id" asp-route-SizeId="@item.Size.Id"*@
+                                                    </div>
+                                                </td>
+
+
+
+                                            </tr>
+                                        }
+
                                     }
 
-                                }
-
-                            </tbody>
-
-                        </table>
+                                </tbody>
+                             
+                                </table>
+                      
                         </form>
                     </div>
 
@@ -108,7 +119,7 @@
 
 
                 </div>
-                @*//����� ����� �max*@
+                @*//????? ????? ?max*@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row mb-5">
@@ -172,6 +183,7 @@
 }
 
 
+
 @*<h2>Index</h2>
 
     <p>
@@ -180,6 +192,9 @@
     <table class="table">
         <thead>
             <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AmountOfOrders)
+                    </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Color)
                 </th>
@@ -196,8 +211,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
+    @foreach (var item in Model) {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountOfOrders)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Color.Id)
                 </td>
@@ -216,6 +234,6 @@
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>
-            }
+    }
         </tbody>
     </table>*@

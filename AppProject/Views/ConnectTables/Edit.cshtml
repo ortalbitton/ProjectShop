@@ -1,4 +1,4 @@
-﻿@model AppProject.Models.ConnectTable
+@model AppProject.Models.ConnectTable
 
 @{
     ViewData["Title"] = "Edit";
@@ -16,18 +16,21 @@
     <input type="hidden" asp-for="ColorId" />
     <input type="hidden" asp-for="MartId" />
         <div class="form-group">
+            <label asp-for="AmountOfOrders" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AmountOfOrders" class="form-control" />
+                <span asp-validation-for="AmountOfOrders" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
-
 </form>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

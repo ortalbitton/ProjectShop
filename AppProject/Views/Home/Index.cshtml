@@ -36,6 +36,7 @@
                 <li id="Account"><a asp-action="LogIn" asp-controller="Customers">כניסה</a></li>
                 <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
                 <li id="ShoppingCart"><a asp-action="Index" asp-controller="ConnectTables">עגלה שלי</a></li>
+          
                 @*@foreach (var MartId in ViewBag.MartId)
             {
                 <li id="ShoppingCart"><a asp-route-id="@MartId" asp-action="Edit" asp-controller="ConnectTables">עגלה שלי</a></li>
@@ -109,6 +110,7 @@
                 <div class="column"><a asp-action="API">המרה של מטבע בין דולר לשקל</a></div>
                 <div class="column"><a asp-action="Graph">גרף</a></div>
                 <div class="column"><a asp-action="Graph1">1גרף</a></div>
+                <div class="column"><a asp-action="Map">מפה</a></div>
             </div>
         </footer>
 

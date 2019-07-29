@@ -8,7 +8,7 @@ using AppProject.Models;
 namespace AppProject.Migrations
 {
     [DbContext(typeof(AppProjectContext))]
-    [Migration("20190706204429_Create_Tables")]
+    [Migration("20190723202746_Create_Tables")]
     partial class Create_Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,10 @@ namespace AppProject.Migrations
                     b.Property<int>("SizeId");
 
                     b.Property<int>("MartId");
+
+                    b.Property<int>("AmountInStock");
+
+                    b.Property<int>("AmountOfOrders");
 
                     b.HasKey("ProductesId", "ColorId", "SizeId", "MartId");
 
@@ -101,10 +105,6 @@ namespace AppProject.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AmountInStock");
-
-                    b.Property<int>("AmountOfOrders");
 
                     b.Property<double>("DeliveryPrice");
 

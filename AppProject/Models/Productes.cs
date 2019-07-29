@@ -11,8 +11,7 @@ namespace AppProject.Models
         public int Id { get; set; }
         public string ProductName { get; set; }      
         public double Price { get; set; }
-        public int AmountInStock { get; set; }
-        public int AmountOfOrders { get; set; }
+   
         public double DeliveryPrice { get; set; }
         public string ImgId { get; set; }
 

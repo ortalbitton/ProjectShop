@@ -16,6 +16,12 @@
         <input type="hidden" asp-for="ColorId" />
         <input type="hidden" asp-for="MartId" />
         <dt>
+            @Html.DisplayNameFor(model => model.AmountOfOrders)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountOfOrders)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Color)
         </dt>
         <dd>
@@ -44,7 +50,7 @@
     <form asp-action="Delete">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index" asp-controller="Marts">Back to Mart</a>
+            <a asp-action="Index">Back to List</a>
         </div>
     </form>
 </div>

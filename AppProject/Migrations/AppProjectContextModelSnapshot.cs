@@ -50,6 +50,10 @@ namespace AppProject.Migrations
 
                     b.Property<int>("MartId");
 
+                    b.Property<int>("AmountInStock");
+
+                    b.Property<int>("AmountOfOrders");
+
                     b.HasKey("ProductesId", "ColorId", "SizeId", "MartId");
 
                     b.HasIndex("ColorId");
@@ -100,10 +104,6 @@ namespace AppProject.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AmountInStock");
-
-                    b.Property<int>("AmountOfOrders");
 
                     b.Property<double>("DeliveryPrice");
 

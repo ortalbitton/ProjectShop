@@ -38,6 +38,7 @@ namespace AppProject.Controllers
                 ViewBag.CustomerId = (from u in _context.Customer
                                   where u.Mail == HttpContext.Session.GetString("Mail")
                                   select u.FirstName);
+
             }
 
             return View();
@@ -54,6 +55,11 @@ namespace AppProject.Controllers
         {
    
             return View();
+        }
+
+        public IActionResult Map()
+        {
+                return View();
         }
 
         public IActionResult Graph()

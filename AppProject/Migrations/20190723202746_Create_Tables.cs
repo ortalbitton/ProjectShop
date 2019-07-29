@@ -111,8 +111,6 @@ namespace AppProject.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AmountInStock = table.Column<int>(nullable: false),
-                    AmountOfOrders = table.Column<int>(nullable: false),
                     DeliveryPrice = table.Column<double>(nullable: false),
                     ImgId = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
@@ -137,7 +135,9 @@ namespace AppProject.Migrations
                     ProductesId = table.Column<int>(nullable: false),
                     ColorId = table.Column<int>(nullable: false),
                     SizeId = table.Column<int>(nullable: false),
-                    MartId = table.Column<int>(nullable: false)
+                    MartId = table.Column<int>(nullable: false),
+                    AmountInStock = table.Column<int>(nullable: false),
+                    AmountOfOrders = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
