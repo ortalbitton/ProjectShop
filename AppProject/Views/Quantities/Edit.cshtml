@@ -1,4 +1,4 @@
-@model AppProject.Models.ConnectTable
+@model AppProject.Models.Quantities
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,17 +8,18 @@
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>ConnectTable</h4>
+        <h4>Quantities</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ProductesId" />
     <input type="hidden" asp-for="SizeId" />
     <input type="hidden" asp-for="ColorId" />
+    <input type="hidden" asp-for="MartId" />
         <div class="form-group">
-            <label asp-for="AmountInStock" class="col-md-2 control-label"></label>
+            <label asp-for="AmountOfOrders" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="AmountInStock" class="form-control" />
-                <span asp-validation-for="AmountInStock" class="text-danger"></span>
+                <input asp-for="AmountOfOrders" class="form-control" />
+                <span asp-validation-for="AmountOfOrders" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

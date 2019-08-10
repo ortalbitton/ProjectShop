@@ -15,7 +15,7 @@ namespace AppProject.Models
 
         public Customer Customer { get; set; }
 
-        public ICollection<ConnectTable> Details { get; set; } 
+        public ICollection<Quantities> DetailsClient { get; set; }
 
 
     }

@@ -1,239 +1,53 @@
-﻿@model IEnumerable<AppProject.Models.ConnectTable>
+@model IEnumerable<AppProject.Models.ConnectTable>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/magnific-popup.css">
-    <link rel="stylesheet" href="~/css/jquery-ui.css">
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="~/css/aos.css">
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
+<h2>Index</h2>
 
-    <header>
-        <img class="logo" src="~/imagesweb/logo.jpg" />
-    </header>
-
-    <div class="site-section">
-        <div class="container">
-
-            @if (!ViewBag.ConnectClient)
-            {
-                <div style="float:right;position:relative">Please Connect First</div>
-                <div style="position:absolute;margin-top:25px;">
-                    <div id="Account"><a asp-action="LogIn" asp-controller="Customers">Existing Customers</a></div>
-                    <div id="Account"><a asp-action="Create" asp-controller="Customers">New Customers</a></div>
-                </div>
-            }
-            else
-            {
-
-                <div class="row mb-5">
-                    <div class="site-blocks-table">
-                        <form method="post" asp-action="Delete">
-                     
-                            <table class="table table-bordered">
-
-                                <thead>
-                                    <tr>
-                                        <th class="product-thumbnail">Image</th>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-price">Color</th>
-                                        <th class="product-price">Size</th>
-                                        <th class="product-quantity">AmountOfOrders</th>
-                                        @*<th class="product-quantity">AmountInStock</th>*@
-                                        <th class="product-remove">Remove</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        if (item.AmountOfOrders != 0)
-                                        {
-
-                                            <tr>
-                                                <td class="product-thumbnail">
-                                                    <img src="~/imagesweb/@item.Productes.ImgId" alt="Image" class="img-fluid">
-                                                </td>
-                                                <td class="product-name">
-                                                    <h2 class="h5 text-black">@item.Productes.ProductName</h2>
-                                                </td>
-                                                <td>@item.Productes.Price</td>
-
-
-
-                                                <td>
-                                                    @item.Color.ColorName
-                                                    @*<input type="text" name="N_Color" id="N_Color" value="@item.Color.Id" />*@
-
-                                                </td>
-                                                <td>
-                                                    @item.Size.SizeName
-                                                    @*<input type="text" name="N_Size" id="N_Size" value="@item.Size.Id" />*@
-
-                                                </td>
-                                                @if (item.AmountInStock > 0)
-                                                {
-                                                    <td>
-                                                        @item.AmountOfOrders
-                                                    </td>
-                                                }
-                                                else
-                                                {
-                                                    <td>חסר במלאי</td>
-                                                }
-                                                <td>
-                                                    <div class="form-actions no-color">
-                                                        <input type="submit" value="X" class="btn btn-primary height-auto btn-sm" />
-                                                        @*asp-route-ColorId="@item.Color.Id" asp-route-SizeId="@item.Size.Id"*@
-                                                    </div>
-                                                </td>
-
-
-
-                                            </tr>
-                                        }
-
-                                    }
-
-                                </tbody>
-                             
-                                </table>
-                      
-                        </form>
-                    </div>
-
-
-
-
-
-                </div>
-                @*//????? ????? ?max*@
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row mb-5">
-
-                            @*<div class="col-md-6 mb-3 mb-md-0">*@
-                            @*<a asp-action="Edit" asp-controller="ConnectTables" class="btn btn-primary btn-sm btn-block">Update Cart</a>*@
-                            @*</div>*@
-
-                            <div class="col-md-6">
-                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-6 pl-5">
-                        <div class="row justify-content-end">
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-12 text-right border-bottom mb-5">
-                                        <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <span class="text-black">Subtotal</span>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <strong class="text-black"> @ViewBag.total</strong>
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6">
-                                        <span class="text-black">Total</span>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <strong class="text-black"> @ViewBag.total</strong>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <img src="~/imagesweb/ajax-loader.gif" class="hide loader" />
-                                        <button class="btn btn-primary btn-lg btn-block btn-loader">Proceed To Checkout</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            }
-        </div>
-    </div>
-
-</body>
-</html>
-
-@section Scripts{
-    <script src="~/js/Mart.js"></script>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountInStock)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Productes.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size.Id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
 }
-
-
-
-@*<h2>Index</h2>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AmountOfOrders)
-                    </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Color)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mart)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Productes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Size)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AmountOfOrders)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mart.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Productes.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Size.Id)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>*@
+    </tbody>
+</table>

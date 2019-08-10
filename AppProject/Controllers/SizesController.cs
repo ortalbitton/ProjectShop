@@ -22,14 +22,14 @@ namespace AppProject.Controllers
         // GET: Sizes
         public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.Sizes.Include(m => m.Details);
+            var databaseContext = _context.Sizes.Include(m => m.DetailsManager);
 
             return PartialView(await databaseContext.Where(s=>s.SizeName=="XS" || s.SizeName=="S" || s.SizeName=="M" || s.SizeName=="L" || s.SizeName=="XL").ToListAsync());
         }
 
         public async Task<IActionResult> List()
         {
-            var databaseContext = _context.Sizes.Include(m => m.Details);
+            var databaseContext = _context.Sizes.Include(m => m.DetailsManager);
 
             return View(await databaseContext.ToListAsync());
         }

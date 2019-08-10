@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace AppProject.Models
 {
-    public class ConnectTable
+    public class Quantities
     {
-        //many to many
+
         public int ProductesId { get; set; }
         public Productes Productes { get; set; }
 
@@ -19,8 +17,10 @@ namespace AppProject.Models
         public int ColorId { get; set; }
         public Colors Color { get; set; }
 
-        public int AmountInStock { get; set; }
+        public int MartId { get; set; }
+        public Mart Mart { get; set; }
 
+        public int AmountOfOrders { get; set; }
 
     }
 }

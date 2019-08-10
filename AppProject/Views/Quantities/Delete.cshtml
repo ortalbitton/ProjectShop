@@ -1,4 +1,4 @@
-@model AppProject.Models.ConnectTable
+@model AppProject.Models.Quantities
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,23 +8,30 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>ConnectTable</h4>
+    <h4>Quantities</h4>
     <hr />
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="ProductesId" />
         <input type="hidden" asp-for="SizeId" />
         <input type="hidden" asp-for="ColorId" />
+        <input type="hidden" asp-for="MartId" />
         <dt>
-            @Html.DisplayNameFor(model => model.AmountInStock)
+            @Html.DisplayNameFor(model => model.AmountOfOrders)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AmountInStock)
+            @Html.DisplayFor(model => model.AmountOfOrders)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Color)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Color.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mart.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Productes)

@@ -135,23 +135,15 @@ namespace AppProject.Migrations
                     ProductesId = table.Column<int>(nullable: false),
                     ColorId = table.Column<int>(nullable: false),
                     SizeId = table.Column<int>(nullable: false),
-                    MartId = table.Column<int>(nullable: false),
-                    AmountInStock = table.Column<int>(nullable: false),
-                    AmountOfOrders = table.Column<int>(nullable: false)
+                    AmountInStock = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConnectTable", x => new { x.ProductesId, x.ColorId, x.SizeId, x.MartId });
+                    table.PrimaryKey("PK_ConnectTable", x => new { x.ProductesId, x.ColorId, x.SizeId });
                     table.ForeignKey(
                         name: "FK_ConnectTable_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ConnectTable_Mart_MartId",
-                        column: x => x.MartId,
-                        principalTable: "Mart",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -168,15 +160,49 @@ namespace AppProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Quantities",
+                columns: table => new
+                {
+                    ProductesId = table.Column<int>(nullable: false),
+                    ColorId = table.Column<int>(nullable: false),
+                    SizeId = table.Column<int>(nullable: false),
+                    MartId = table.Column<int>(nullable: false),
+                    AmountOfOrders = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quantities", x => new { x.ProductesId, x.ColorId, x.SizeId, x.MartId });
+                    table.ForeignKey(
+                        name: "FK_Quantities_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Quantities_Mart_MartId",
+                        column: x => x.MartId,
+                        principalTable: "Mart",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Quantities_Productes_ProductesId",
+                        column: x => x.ProductesId,
+                        principalTable: "Productes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Quantities_Sizes_SizeId",
+                        column: x => x.SizeId,
+                        principalTable: "Sizes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ConnectTable_ColorId",
                 table: "ConnectTable",
                 column: "ColorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ConnectTable_MartId",
-                table: "ConnectTable",
-                column: "MartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConnectTable_SizeId",
@@ -189,6 +215,21 @@ namespace AppProject.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Quantities_ColorId",
+                table: "Quantities",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quantities_MartId",
+                table: "Quantities",
+                column: "MartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quantities_SizeId",
+                table: "Quantities",
+                column: "SizeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SubCategory_CategoriesId",
                 table: "SubCategory",
                 column: "CategoriesId");
@@ -198,6 +239,9 @@ namespace AppProject.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ConnectTable");
+
+            migrationBuilder.DropTable(
+                name: "Quantities");
 
             migrationBuilder.DropTable(
                 name: "Colors");

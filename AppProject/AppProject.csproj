@@ -88,6 +88,8 @@
     <Compile Remove="Migrations\20190706204429_Create_Tables.Designer.cs" />
     <Compile Remove="Migrations\20190722221943_Create_Tables.cs" />
     <Compile Remove="Migrations\20190722221943_Create_Tables.Designer.cs" />
+    <Compile Remove="Migrations\20190723202746_Create_Tables.cs" />
+    <Compile Remove="Migrations\20190723202746_Create_Tables.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -119,9 +121,6 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Colors\List.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\ConnectTables\Add.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Customers\List.cshtml">

@@ -22,7 +22,7 @@ namespace AppProject.Controllers
         // GET: Colors
         public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.Colors.Include(m => m.Details).ThenInclude(ps => ps.Productes);
+            var databaseContext = _context.Colors.Include(m => m.DetailsManager).ThenInclude(ps => ps.Productes);
 
 
             return PartialView(await databaseContext.ToListAsync());
@@ -30,7 +30,7 @@ namespace AppProject.Controllers
 
         public async Task<IActionResult> List()
         {
-            var databaseContext = _context.Colors.Include(m => m.Details).ThenInclude(ps => ps.Productes);
+            var databaseContext = _context.Colors.Include(m => m.DetailsManager).ThenInclude(ps => ps.Productes);
 
 
             return View(await databaseContext.ToListAsync());
@@ -39,12 +39,12 @@ namespace AppProject.Controllers
         public async Task<IActionResult> Search(int? colorid)
         {
 
-            var product = await _context.Colors.Include(m => m.Details).ThenInclude(ps => ps.Productes)
+            var product = await _context.Colors.Include(m => m.DetailsManager).ThenInclude(ps => ps.Productes)
                 .SingleOrDefaultAsync(m => m.Id == colorid);
 
             ////קשר בין צבע למוצר
             var Products = from pro in _context.Productes
-                           join connect in product.Details
+                           join connect in product.DetailsManager
                            on pro.Id equals connect.ProductesId
                            select new ProductByColorSizeVM() { Id = connect.ProductesId, ImgId = pro.ImgId, ProductName = pro.ProductName, Price = pro.Price };
 

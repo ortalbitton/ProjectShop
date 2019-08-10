@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppProject.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AppProject.Controllers
 {
@@ -17,18 +16,14 @@ namespace AppProject.Controllers
 
         public MartsController(AppProjectContext context)
         {
-            _context = context;
-
+            _context = context;    
         }
 
         // GET: Marts
         public async Task<IActionResult> Index()
         {
-
-            var appProjectContext = _context.Mart.Include(m => m.Customer).Include(p => p.Details).ThenInclude(ps => ps.Productes);
-
+            var appProjectContext = _context.Mart.Include(m => m.Customer);
             return View(await appProjectContext.ToListAsync());
-
         }
 
         // GET: Marts/Details/5
@@ -49,7 +44,6 @@ namespace AppProject.Controllers
 
             return View(mart);
         }
-
 
         // GET: Marts/Create
         public IActionResult Create()
@@ -158,7 +152,6 @@ namespace AppProject.Controllers
             return RedirectToAction("Index");
         }
 
-       
         private bool MartExists(int id)
         {
             return _context.Mart.Any(e => e.Id == id);

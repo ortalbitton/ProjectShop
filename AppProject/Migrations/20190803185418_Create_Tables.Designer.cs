@@ -8,7 +8,7 @@ using AppProject.Models;
 namespace AppProject.Migrations
 {
     [DbContext(typeof(AppProjectContext))]
-    [Migration("20190723202746_Create_Tables")]
+    [Migration("20190803185418_Create_Tables")]
     partial class Create_Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,17 +49,11 @@ namespace AppProject.Migrations
 
                     b.Property<int>("SizeId");
 
-                    b.Property<int>("MartId");
-
                     b.Property<int>("AmountInStock");
 
-                    b.Property<int>("AmountOfOrders");
-
-                    b.HasKey("ProductesId", "ColorId", "SizeId", "MartId");
+                    b.HasKey("ProductesId", "ColorId", "SizeId");
 
                     b.HasIndex("ColorId");
-
-                    b.HasIndex("MartId");
 
                     b.HasIndex("SizeId");
 
@@ -123,6 +117,29 @@ namespace AppProject.Migrations
                     b.ToTable("Productes");
                 });
 
+            modelBuilder.Entity("AppProject.Models.Quantities", b =>
+                {
+                    b.Property<int>("ProductesId");
+
+                    b.Property<int>("ColorId");
+
+                    b.Property<int>("SizeId");
+
+                    b.Property<int>("MartId");
+
+                    b.Property<int>("AmountOfOrders");
+
+                    b.HasKey("ProductesId", "ColorId", "SizeId", "MartId");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("MartId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("Quantities");
+                });
+
             modelBuilder.Entity("AppProject.Models.Sizes", b =>
                 {
                     b.Property<int>("Id")
@@ -154,22 +171,17 @@ namespace AppProject.Migrations
             modelBuilder.Entity("AppProject.Models.ConnectTable", b =>
                 {
                     b.HasOne("AppProject.Models.Colors", "Color")
-                        .WithMany("Details")
+                        .WithMany("DetailsManager")
                         .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AppProject.Models.Mart", "Mart")
-                        .WithMany("Details")
-                        .HasForeignKey("MartId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("AppProject.Models.Productes", "Productes")
-                        .WithMany("Details")
+                        .WithMany("DetailsManager")
                         .HasForeignKey("ProductesId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AppProject.Models.Sizes", "Size")
-                        .WithMany("Details")
+                        .WithMany("DetailsManager")
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -187,6 +199,29 @@ namespace AppProject.Migrations
                     b.HasOne("AppProject.Models.SubCategory", "SubCategory")
                         .WithMany("Products")
                         .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AppProject.Models.Quantities", b =>
+                {
+                    b.HasOne("AppProject.Models.Colors", "Color")
+                        .WithMany("DetailsClient")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AppProject.Models.Mart", "Mart")
+                        .WithMany("DetailsClient")
+                        .HasForeignKey("MartId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AppProject.Models.Productes", "Productes")
+                        .WithMany("DetailsClient")
+                        .HasForeignKey("ProductesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AppProject.Models.Sizes", "Size")
+                        .WithMany("DetailsClient")
+                        .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

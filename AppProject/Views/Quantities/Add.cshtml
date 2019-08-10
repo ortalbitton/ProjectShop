@@ -1,4 +1,4 @@
-﻿@model AppProject.Models.ConnectTable
+﻿@model AppProject.Models.Quantities
 
 @{
     ViewData["Title"] = "Add";
@@ -56,11 +56,10 @@
                             <div class="mb-5">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        @*@foreach (var Stock in ViewBag.AmountInStock)
-                                        {*@
-                                            <input asp-for="AmountOfOrders" min="1" max="9" class="form-control" />
-                                        @*}*@
-                                        </div>
+                                        <input id="Amout"  asp-for="AmountOfOrders" min="1" max="9" class="form-control" />
+
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -74,8 +73,8 @@
                             </div>
 
                                 <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Add To Mart" class="btn btn-default" />
+                                    <div class="col-md-offset-2 col-md-10">                             
+                                        <input type="submit" value="Add To Mart" class="btn btn-default" />                                       
                                     </div>
                                 </div>
 
@@ -92,6 +91,3 @@
 </body>
 </html>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

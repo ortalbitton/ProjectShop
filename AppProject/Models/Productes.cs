@@ -15,7 +15,9 @@ namespace AppProject.Models
         public double DeliveryPrice { get; set; }
         public string ImgId { get; set; }
 
-        public ICollection<ConnectTable> Details { get; set; }
+        public ICollection<ConnectTable> DetailsManager { get; set; }
+
+        public ICollection<Quantities> DetailsClient { get; set; }
 
         public int SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; }

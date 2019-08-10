@@ -86,7 +86,7 @@ namespace AppProject.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Productes.Include(m => m.Details)
+            var product = await _context.Productes.Include(m => m.DetailsManager)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {

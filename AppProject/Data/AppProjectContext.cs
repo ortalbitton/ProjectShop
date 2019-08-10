@@ -28,29 +28,46 @@ namespace AppProject.Models
 
             //one to many
             modelBuilder.Entity<ConnectTable>()
-                .HasKey(t => new { t.ProductesId, t.ColorId, t.SizeId, t.MartId });
+                .HasKey(t => new { t.ProductesId, t.ColorId, t.SizeId });
 
             modelBuilder.Entity<ConnectTable>()
                 .HasOne(pt => pt.Productes)
-                .WithMany(p => p.Details)
+                .WithMany(p => p.DetailsManager)
                 .HasForeignKey(pt => pt.ProductesId);
 
             modelBuilder.Entity<ConnectTable>()
                 .HasOne(pt => pt.Color)
-                .WithMany(t => t.Details)
+                .WithMany(t => t.DetailsManager)
                 .HasForeignKey(pt => pt.ColorId);
 
             modelBuilder.Entity<ConnectTable>()
               .HasOne(pt => pt.Size)
-              .WithMany(t => t.Details)
+              .WithMany(t => t.DetailsManager)
               .HasForeignKey(pt => pt.SizeId);
 
-            modelBuilder.Entity<ConnectTable>()
-              .HasOne(pt => pt.Mart)
-              .WithMany(t => t.Details)
-              .HasForeignKey(pt => pt.MartId);
+            modelBuilder.Entity<Quantities>()
+               .HasKey(t => new { t.ProductesId, t.ColorId, t.SizeId,t.MartId});
 
-    
+            modelBuilder.Entity<Quantities>()
+                .HasOne(pt => pt.Productes)
+                .WithMany(p => p.DetailsClient)
+                .HasForeignKey(pt => pt.ProductesId);
+
+            modelBuilder.Entity<Quantities>()
+                .HasOne(pt => pt.Color)
+                .WithMany(t => t.DetailsClient)
+                .HasForeignKey(pt => pt.ColorId);
+
+            modelBuilder.Entity<Quantities>()
+              .HasOne(pt => pt.Size)
+              .WithMany(t => t.DetailsClient)
+              .HasForeignKey(pt => pt.SizeId);
+
+            modelBuilder.Entity<Quantities>()
+             .HasOne(pt => pt.Mart)
+             .WithMany(t => t.DetailsClient)
+             .HasForeignKey(pt => pt.MartId);
+
 
         }
 
@@ -71,6 +88,9 @@ namespace AppProject.Models
 
 
         public DbSet<AppProject.Models.Categories> Categories { get; set; }
+
+
+        public DbSet<AppProject.Models.Quantities> Quantities { get; set; }
 
 
 

@@ -10,6 +10,8 @@ namespace AppProject.Models
         public int Id { get; set; }
         public string SizeName { get; set; }
 
-        public ICollection<ConnectTable> Details { get; set; }
+        public ICollection<ConnectTable> DetailsManager { get; set; }
+
+        public ICollection<Quantities> DetailsClient { get; set; }
     }
 }

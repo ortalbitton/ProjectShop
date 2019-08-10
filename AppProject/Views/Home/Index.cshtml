@@ -35,13 +35,7 @@
             <ul>
                 <li id="Account"><a asp-action="LogIn" asp-controller="Customers">כניסה</a></li>
                 <li id="Account"><a asp-action="Create" asp-controller="Customers">רישום</a></li>
-                <li id="ShoppingCart"><a asp-action="Index" asp-controller="ConnectTables">עגלה שלי</a></li>
-          
-                @*@foreach (var MartId in ViewBag.MartId)
-            {
-                <li id="ShoppingCart"><a asp-route-id="@MartId" asp-action="Edit" asp-controller="ConnectTables">עגלה שלי</a></li>
-            }*@
-                
+                <li id="ShoppingCart"><a asp-action="Index" asp-controller="Quantities">עגלה שלי</a></li>
             </ul>
 
 
