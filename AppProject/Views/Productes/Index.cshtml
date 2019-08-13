@@ -17,7 +17,7 @@
                 <img src="~/imagesweb/@Product.ImgId" />
                 <div class="product-info">
                     <a asp-controller="Quantities" asp-action="Add" asp-route-id="@Product.Id">@Product.ProductName</a>
-                    <p name="productname">@Product.Price</p>
+                    <p name="productname">$@Product.Price</p>
                 </div>
 
                 @*<div>

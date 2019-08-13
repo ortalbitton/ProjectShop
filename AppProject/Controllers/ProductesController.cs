@@ -52,7 +52,7 @@ namespace AppProject.Controllers
         {
             var products = _context.Productes.Where(p => p.Price >= minp && p.Price <= maxp).ToListAsync();
             return new JsonResult(await products);
-
+       
         }
 
         public async Task<IActionResult> GroupByPrice()

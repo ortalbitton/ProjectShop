@@ -43,7 +43,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#Product').html('');
                 for (var i = 0; i < data.length; i++) {
-                    $('#Product').append(' <div class="col-md-4"><div class="product-item"><img src="/imagesweb/' + data[i].imgId + '"/><div class="product-info"><a href="/Productes/Details/' + data[i].id + '">' + data[i].productName + '</a><p>' + data[i].price + '</p></div></div></div>') // show response from the php script.
+                    $('#Product').append(' <div class="col-md-4"><div class="product-item"><img src="/imagesweb/' + data[i].imgId + '"/><div class="product-info"><a href="/Productes/Details/' + data[i].id + '">' + data[i].productName + '</a><p>$' + data[i].price + '</p></div></div></div>') // show response from the php script.
 
                 }
             }
@@ -78,9 +78,11 @@ $(document).ready(function () {
         });
     });
 
+
     $('input[value=size]').change(function () {
         if ($(this).prop("checked")) {
             //do the stuff that you would do when 'checked'
+
             var sizeid = $(this).attr("id")
             $.ajax({
                 url: "Sizes/Search?id" + sizeid,

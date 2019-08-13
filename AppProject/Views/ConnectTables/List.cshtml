@@ -1,0 +1,53 @@
+@model IEnumerable<AppProject.Models.ConnectTable>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountInStock)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.ColorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Productes.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size.SizeName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { ProductesId = item.ProductesId, ColorId=item.ColorId,SizeId=item.SizeId}) |
+                @Html.ActionLink("Delete", "Delete", new { ProductesId = item.ProductesId, ColorId=item.ColorId,SizeId=item.SizeId})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

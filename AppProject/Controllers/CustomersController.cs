@@ -22,7 +22,6 @@ namespace AppProject.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-
             return View(await _context.Customer.ToListAsync());
         }
 
@@ -58,10 +57,10 @@ namespace AppProject.Controllers
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,Address,City,CreditCard,Mail,Password")] Customer customer)
         {
             if (ModelState.IsValid)
-            {
+            {             
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("CreateMart", "Marts", customer);
             }
             return View(customer);
         }
@@ -86,12 +85,13 @@ namespace AppProject.Controllers
                 HttpContext.Session.SetString("Mail", customer.Mail.ToString());
                 return RedirectToAction("Index", "Home");
             }
-        
+
 
             ViewBag.Fail = true;
 
             return View(customer);
         }
+
 
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -27,6 +27,14 @@ namespace AppProject.Controllers
             return View(await appProjectContext.ToListAsync());
         }
 
+        public async Task<IActionResult> List()
+        {
+            var appProjectContext = _context.ConnectTable.Include(c => c.Color).Include(c => c.Productes).Include(c => c.Size);
+
+            return View(await appProjectContext.ToListAsync());
+        }
+
+        //עדכון כמות המלאי בעת שהלקוח מוסיפה אחת מהאופציות שבמלאי לכמויות שלו
         // GET: ConnectTables/Details/quantities
         public async Task<IActionResult> Details(Quantities quantities)
         {
@@ -65,9 +73,9 @@ namespace AppProject.Controllers
         // GET: ConnectTables/Create
         public IActionResult Create()
         {
-            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id");
-            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id");
-            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "Id");
+            ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "ColorName");
+            ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "ProductName");
+            ViewData["SizeId"] = new SelectList(_context.Sizes, "Id", "SizeName");
             return View();
         }
 
@@ -82,7 +90,7 @@ namespace AppProject.Controllers
             {
                 _context.Add(connectTable);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
             ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
@@ -93,14 +101,14 @@ namespace AppProject.Controllers
 
        
         // GET: ConnectTables/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? ProductesId, int? ColorId, int? SizeId)
         {
-            if (id == null)
+            if (ProductesId == null)
             {
                 return NotFound();
             }
 
-            var connectTable = await _context.ConnectTable.SingleOrDefaultAsync(m => m.ProductesId == id);
+            var connectTable = await _context.ConnectTable.SingleOrDefaultAsync(m => m.ProductesId == ProductesId && m.SizeId==SizeId && m.ColorId==ColorId);
             if (connectTable == null)
             {
                 return NotFound();
@@ -116,9 +124,9 @@ namespace AppProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductesId,SizeId,ColorId,AmountInStock")] ConnectTable connectTable)
+        public async Task<IActionResult> Edit(int ProductesId,int SizeId,int ColorId, [Bind("ProductesId,SizeId,ColorId,AmountInStock")] ConnectTable connectTable)
         {
-            if (id != connectTable.ProductesId)
+            if (ProductesId != connectTable.ProductesId)
             {
                 return NotFound();
             }
@@ -141,7 +149,7 @@ namespace AppProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             ViewData["ColorId"] = new SelectList(_context.Colors, "Id", "Id", connectTable.ColorId);
             ViewData["ProductesId"] = new SelectList(_context.Productes, "Id", "Id", connectTable.ProductesId);
@@ -152,9 +160,9 @@ namespace AppProject.Controllers
 
 
         // GET: ConnectTables/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? ProductesId, int? ColorId, int? SizeId)
         {
-            if (id == null)
+            if (ProductesId == null)
             {
                 return NotFound();
             }
@@ -163,7 +171,7 @@ namespace AppProject.Controllers
                 .Include(c => c.Color)
                 .Include(c => c.Productes)
                 .Include(c => c.Size)
-                .SingleOrDefaultAsync(m => m.ProductesId == id);
+                .SingleOrDefaultAsync(m => m.ProductesId == ProductesId && m.SizeId == SizeId && m.ColorId == ColorId);
             if (connectTable == null)
             {
                 return NotFound();
@@ -175,12 +183,12 @@ namespace AppProject.Controllers
         // POST: ConnectTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int ProductesId,int SizeId,int ColorId)
         {
-            var connectTable = await _context.ConnectTable.SingleOrDefaultAsync(m => m.ProductesId == id);
+            var connectTable = await _context.ConnectTable.SingleOrDefaultAsync(m => m.ProductesId == ProductesId && m.ColorId==ColorId && m.SizeId==SizeId);
             _context.ConnectTable.Remove(connectTable);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         private bool ConnectTableExists(int id)

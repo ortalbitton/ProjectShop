@@ -14,8 +14,7 @@
 
             <div class="product-info">
                 <a asp-controller="Productes" asp-action="Details" asp-route-id="@Product.Id">@Product.ProductName</a>
-                <h6>@Product.Price</h6>
-                <a href="#" class="site-btn btn-line">Add TO Mart</a>
+                <p>$@Product.Price</p>
             </div>
         </div>
     </div>

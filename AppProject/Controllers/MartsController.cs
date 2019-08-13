@@ -45,6 +45,16 @@ namespace AppProject.Controllers
             return View(mart);
         }
 
+        //הוספת עגלה ללקוח חדש שהתחבר
+        public async Task<IActionResult> CreateMart(Customer customer)
+        {
+            Mart m = new Mart();
+            m.Id = customer.Id;
+            _context.Add(m);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: Marts/Create
         public IActionResult Create()
         {

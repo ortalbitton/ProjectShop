@@ -11,9 +11,6 @@
     <h4>ConnectTable</h4>
     <hr />
     <dl class="dl-horizontal">
-        <input type="hidden" asp-for="ProductesId" />
-        <input type="hidden" asp-for="SizeId" />
-        <input type="hidden" asp-for="ColorId" />
         <dt>
             @Html.DisplayNameFor(model => model.AmountInStock)
         </dt>
@@ -24,26 +21,29 @@
             @Html.DisplayNameFor(model => model.Color)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Color.Id)
+            @Html.DisplayFor(model => model.Color.ColorName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Productes)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Productes.Id)
+            @Html.DisplayFor(model => model.Productes.ProductName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Size)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Size.Id)
+            @Html.DisplayFor(model => model.Size.SizeName)
         </dd>
     </dl>
     
     <form asp-action="Delete">
+        <input type="hidden" asp-for="ProductesId" />
+        <input type="hidden" asp-for="SizeId" />
+        <input type="hidden" asp-for="ColorId" />
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <a asp-action="List">Back to List</a>
         </div>
     </form>
 </div>
