@@ -19,7 +19,19 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 
-<body>
+<body class="my-p-bg">
+    @*(String)*@
+    @*@if ((String)@ViewData["Title"] != "Home")
+        {
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header nav-mine">
+                        <a class="navbar-brand">@ViewData["Title"]</a>
+                    </div>
+                </div>
+            </nav>
+        }
+        else{ }*@
 
     @*<div class="container body-content">*@
     @RenderBody()

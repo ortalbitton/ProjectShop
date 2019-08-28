@@ -43,7 +43,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#Product').html('');
                 for (var i = 0; i < data.length; i++) {
-                    $('#Product').append(' <div class="col-md-4"><div class="product-item"><img src="/imagesweb/' + data[i].imgId + '"/><div class="product-info"><a href="/Productes/Details/' + data[i].id + '">' + data[i].productName + '</a><p>$' + data[i].price + '</p></div></div></div>') // show response from the php script.
+                    $('#Product').append(' <div class="col-md-4"><div class="product-item"><img src="/imagesweb/' + data[i].imgId + '"/><div class="product-info"><a href="/Quantities/Add/' + data[i].id + '">' + data[i].productName + '</a><p>$' + data[i].price + '</p></div></div></div>') // show response from the php script.
 
                 }
             }

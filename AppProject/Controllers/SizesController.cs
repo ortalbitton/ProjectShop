@@ -43,7 +43,7 @@ namespace AppProject.Controllers
                     where connect.SizeId == sizeid
                     select new ProductByColorSizeVM()
                     {
-                        Id = connect.SizeId,
+                        Id = connect.ProductesId,
                         ProductName = pro.ProductName,
                         ImgId = pro.ImgId,
                         Price = pro.Price

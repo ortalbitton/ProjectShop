@@ -8,7 +8,7 @@ namespace AppProject.ViewModel
     public class ProductByColorSizeVM
     {
 
-            //colorid or size id תלוי מה המשתמש בוחר
+            //productid
             public int Id { get; set; }
 
             public string ProductName { get; set; }
