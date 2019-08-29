@@ -220,9 +220,9 @@ namespace AppProject.Controllers
         // POST: Quantities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int Productid,int ColorId,int SizeId)
+        public async Task<IActionResult> DeleteConfirmed(int Productid,int ColorId,int SizeId,int MartId)
         {
-            var quantities = await _context.Quantities.SingleOrDefaultAsync(m => m.ProductesId == Productid && m.SizeId==SizeId && m.ColorId==ColorId);
+            var quantities = await _context.Quantities.SingleOrDefaultAsync(m => m.ProductesId == Productid && m.SizeId==SizeId && m.ColorId==ColorId && m.MartId== MartId);
             _context.Quantities.Remove(quantities);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");

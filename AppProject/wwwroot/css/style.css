@@ -673,6 +673,7 @@ a {
 .site-blocks-table {
     overflow: auto; 
     text-align:right;
+    width:100%;
 }
   .site-blocks-table .product-thumbnail {
     width: 200px; }
