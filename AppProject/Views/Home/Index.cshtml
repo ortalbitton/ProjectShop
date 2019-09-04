@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="~/css/aos.css">
 </head>
 
-<body onload="myFunction()" style="margin:0;" >
+<body onload="myFunction()" style="margin:0;">
     <div id="loader"></div>
     @*1*@
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>           
+                </button>
             </div>
             <div class="navbar-collapse collapse topnav">
                 <ul class="nav navbar-nav">
@@ -37,21 +37,17 @@
                     <form class="navbar-form navbar-left" id="myform" asp-action="Search" asp-controller="Productes">
                         <div class="input-group">
                             @*<div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>*@
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>*@
 
                             <input type="text" name="name" id="name" placeholder="Search..">
                             @*<button type="submit">sub</button>*@
                         </div>
                     </form>
-                    @*search*@
+                @*search*@
 
-                    @*fix size*@
-                    @*<div class="navbar-brand">
-                        <img class="logo" src="~/imagesweb/logo.jpg" />
-                    </div>*@
                 </div>
             </div>
         </div>
@@ -101,22 +97,27 @@
 
         <div class="container">
             <div class="row mb-5">
-                <aside class="border p-4 rounded mb-4">
-                    <div class="mb-4">
-                        <h3 class="mb-3 h6 text-uppercase text-black d-block shadow">Filter by Price</h3>
-                        <div id="slider-range"></div>
-                        <input type="text" name="text" id="amount" />
+                <aside>
+                    <div class="border bg-pnk mb-4 p-4 rounded">
+                        <div class="mb-4">
+                            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                            <div id="slider-range"></div>
+                            <input type="text" name="text" id="amount" />
+                        </div>
+                        <div id="Size" class="mb-4">
+                        </div>
+                        <div id="Color" class="mb-4">
+                        </div>
                     </div>
-                    <div id="Size" class="mb-4">
-                    </div>
-                    <div id="Color" class="mb-4">
+                    <div>
+                        <iframe width="280" height="157" src="https://www.youtube.com/embed/hhOkBGZfYSw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </aside>
                 <div class="row align">
                     <div class="col-md-12 mb-5">
                         <div class="d-flex">
                             <div class="btn-group show">
-                                <button class="btn btn-white btn-sm dropdown-toggle px-4" id="dropdownMenuReference" aria-expanded="true" type="button" data-toggle="dropdown">Reference</button>
+                                <button class="btn btn-default btn-sm dropdown-toggle px-4" id="dropdownMenuReference" aria-expanded="true" type="button" data-toggle="dropdown">Reference</button>
                                 <div class="dropdown-menu hide" aria-labelledby="dropdownMenuReference" x-placement="bottom-start">
                                     <a class="dropdown-item">Price, low to high</a>
                                 </div>
@@ -128,8 +129,9 @@
             </div>
         </div>
         <footer>
+
             <div class="newspaper">
-                <iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>
+                @*<iframe class="embed-responsive-item" src="~/imagesweb/Video.mp4"></iframe>*@
                 <div class="column"><a asp-action="API">המרה של מטבע בין דולר לשקל</a></div>
                 <div class="column"><a asp-action="Graph">גרף</a></div>
                 <div class="column"><a asp-action="Graph1">1גרף</a></div>

@@ -34,20 +34,20 @@
 
                     <div class="col-md-6">
                         <div class="product-content">
-                            <h2>@PId.ProductName</h2>
+                            <h2 class="shadow-or">@PId.ProductName</h2>
                             <div class="pc-meta">
-                                <h4 class="price">@PId.Price</h4>
+                                <h4 class="price">price:@PId.Price$</h4>
                             </div>
 
                             <div class="input-group">
-                                <span>Colors</span>
+                                <span class="txt-clr">Colors</span>
                                 <span class="input-group-prepend">
                                     <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorId"></select>
                                 </span>
                             </div>
 
                             <div class="input-group">
-                                <span>Sizes</span>
+                                <span class="txt-clr">Sizes</span>
                                 <span class="input-group-prepend">
                                     <select asp-for="SizeId" class="form-control" asp-items="ViewBag.SizeId"></select>
                                 </span>
@@ -56,7 +56,7 @@
                             <div class="mb-5">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <input id="Amout"  asp-for="AmountOfOrders" min="1" max="9" class="form-control" />
+                                        <input id="Amout" asp-for="AmountOfOrders" min="1" max="9" class="form-control" />
 
                                     </div>
 
@@ -72,14 +72,14 @@
 
                             </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">                             
-                                        <input type="submit" value="Add To Mart" class="btn btn-default" />                                       
-                                    </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Add To Mart" class="btn btn-default" />
                                 </div>
+                            </div>
 
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         }

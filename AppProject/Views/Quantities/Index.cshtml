@@ -16,28 +16,29 @@
 </head>
 <body>
 
-    <header>
-        <img class="logo" src="~/imagesweb/logo.jpg" />
-    </header>
+    @*<header>
+            <img class="logo" src="~/imagesweb/logo.jpg" />
+        </header>*@
 
     <div class="site-section">
         <div class="container">
-
             @if (!ViewBag.ConnectClient)
             {
-                <div style="float:right;position:relative">Please Connect First</div>
-                <div style="position:absolute;margin-top:25px;">
-                    <div id="Account"><a asp-action="LogIn" asp-controller="Customers">Existing Customers</a></div>
-                    <div id="Account"><a asp-action="Create" asp-controller="Customers">New Customers</a></div>
+                //style = "float:right;position:relative"
+                <div>
+                    <h1 class="shadow-or">Please Connect First</h1>
+
+                    <div id="Account"><a asp-action="LogIn" asp-controller="Customers" class="link">Existing Customers</a></div>
+                    <div id="Account"><a asp-action="Create" asp-controller="Customers" class="link">New Customers</a></div>
                 </div>
             }
             else
             {
 
                 <div class="row mb-5">
-                    <div class="site-blocks-table">
-                
-                        <table class="table table-bordered">
+                    <div class="site-blocks-table ">
+
+                        <table class="table table-bordered bg-pnk">
                             <thead>
                                 <tr>
                                     <th class="product-thumbnail">Image</th>
@@ -54,7 +55,6 @@
 
 
                                 <tbody>
-
                                     <tr>
                                         <td class="product-thumbnail">
                                             <img src="~/imagesweb/@item.Productes.ImgId" alt="Image" class="img-fluid">
@@ -63,10 +63,8 @@
                                             <h2 class="h5 text-black">@item.Productes.ProductName</h2>
                                         </td>
                                         <td>@item.Productes.Price</td>
-
                                         <td>
                                             @item.Color.ColorName
-
                                         </td>
                                         <td>
                                             @item.Size.SizeName
@@ -91,30 +89,25 @@
                                                 </div>
                                             </form>
                                         </td>
-
                                     </tr>
-
                                 </tbody>
                             }
                         </table>
-                      
+
                     </div>
                 </div>
                 @*//????? ????? ?max*@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row mb-5">
-
                             @*<div class="col-md-6 mb-3 mb-md-0">*@
                             @*<a asp-action="Edit" asp-controller="ConnectTables" class="btn btn-primary btn-sm btn-block">Update Cart</a>*@
                             @*</div>*@
-
                             <div class="col-md-6">
                                 <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</a>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="col-md-6 pl-5">
                         <div class="row justify-content-end">
@@ -149,7 +142,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             }
@@ -218,3 +210,4 @@
     }
         </tbody>
     </table>*@
+
