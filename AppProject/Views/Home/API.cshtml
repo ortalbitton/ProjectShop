@@ -2,22 +2,19 @@
     ViewData["Title"] = "API";
 }
 <h2>@ViewData["Title"].</h2>
-<a asp-action="Index" asp-controller="Home">Back to Shop</a>
 
-<button id="submitButton">המר לשקל</button>
+
 <label>הכנס מחיר בדולר</label>
-<input type="text" id="from" />
+<input type="text" id="from" class="form-control"/>
+<br />
+<button id="submitButton" class="btn btn-default">המר לשקל</button>
 <table id="weatherTable"></table>
+<a asp-action="Index" asp-controller="Home">Back to Shop</a>
 
 @section Scripts{
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script>
-        function CreateWeatherJson(json) {
-
-
-        }
-
         $("#submitButton").click(function (e) {
             from = $("#from").val();
             to = 'ILS';

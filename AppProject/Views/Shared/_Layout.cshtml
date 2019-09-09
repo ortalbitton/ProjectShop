@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AppProject</title>
 
+    <title>@ViewData["Title"] - AppProject</title>
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         @*<link rel="stylesheet" href="~/css/site.css" />*@
@@ -17,8 +17,8 @@
         @*<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
+    <link rel="shortcut icon" href="~/imagesweb/logo.jpg">
 </head>
-
 <body class="my-p-bg">
     @*(String)*@
     @*@if ((String)@ViewData["Title"] != "Home")
@@ -32,13 +32,11 @@
             </nav>
         }
         else{ }*@
-
     @*<div class="container body-content">*@
     @RenderBody()
     @*<hr />
 
         </div>*@
-
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         @*<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
@@ -58,13 +56,9 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
-
     </environment>
-
     @RenderSection("Scripts", required: false)
-
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-
 </body>
-</html >
+</html>
