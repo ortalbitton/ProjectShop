@@ -181,7 +181,7 @@ jQuery(document).ready(function($) {
             success: function (products) {
                 $('#Product').html('');
                 for (var i = 0; i < products.length; i++) {
-                    $('#Product').append(' <div class="col-md-4"><div class="product-item"><img src="/imagesweb/' + products[i].imgId + '"/><div class="product-info"><a href="/Productes/Details/' + products[i].id + '">' + products[i].productName + '</a><p>$' + products[i].price + '</p></div></div></div>')
+                    $('#Product').append(' <div class="col-md-4"><div class="product-item"><img src="/imagesweb/' + products[i].imgId + '"/><div class="product-info"><a href="/Quantities/Add/' + products[i].id + '">' + products[i].productName + '</a><p>$' + products[i].price + '</p></div></div></div>')
 
                 }
             }
